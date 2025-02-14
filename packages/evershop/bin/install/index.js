@@ -108,18 +108,8 @@ async function install() {
     await pool.query(`SELECT 1`);
     sslMode = 'require';
   } catch (e) {
-    if (e.message.includes('does not support SSL')) {
-      // If the database does not support SSL, we will try to connect without SSL
-      pool = new Pool({ ...baseDBSetting, ssl: false });
-      sslMode = 'disable';
-    } else if (e.message.includes('certificate')) {
-      error(
-        `Looks like your database server does not have a valid SSL certificate. Please turn off the SSL option in the database configuration, restart the database server and try again.`
-      );
-    } else {
-      error(e);
-      process.exit(0);
-    }
+    pool = new Pool({ ...baseDBSetting, ssl: false });
+    sslMode = 'disable';
   }
 
   // Check postgres database version
