@@ -17,7 +17,7 @@ CopyRight.propTypes = {
 
 CopyRight.defaultProps = {
   themeConfig: {
-    copyRight: '© 2025 Evershop. All Rights Reserved.'
+    copyRight: '© grooboost Inc. All Rights Reserved.'
   }
 };
 
