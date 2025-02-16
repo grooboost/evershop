@@ -13,10 +13,10 @@ Version.propTypes = {
   version: PropTypes.string.isRequired
 };
 
-export const layout = {
-  areaId: 'footerLeft',
-  sortOrder: 20
-};
+// export const layout = {
+//   areaId: 'footerLeft',
+//   sortOrder: 20
+// };
 
 export const query = `
   query query {

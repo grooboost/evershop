@@ -1,0 +1,62 @@
+Total, 총합
+Order, 주문
+Sku, SKU
+Continue to shipping, 배송 계속
+Continue shopping, 쇼핑 계속하기
+Continue Shopping, 쇼핑 계속하기
+CONTINUE SHOPPING, 쇼핑 계속하기
+Shopping cart, 쇼핑 카트
+Product, 제품
+Price, 가격
+Quantity, 수량
+Remove, 제거
+Qty, 수량
+Sub total, 소계
+Discount(${coupon}), 할인(${coupon})
+Order summary, 주문 요약
+Taxes and shipping calculated at checkout, 결제 시 세금 및 배송비 계산됨
+CHECKOUT, 결제하기
+Change, 변경
+Payment Method, 결제 방법
+Shipping Address, 배송 주소
+Shipping Method, 배송 방법
+No payment methods available, 사용 가능한 결제 수단 없음
+Place Order, 주문하기
+My billing address is same as shipping address, 내 청구 주소는 배송 주소와 동일
+${count} items, ${count}개 항목
+Discount, 할인
+Shipping, 배송
+No tax, 세금 없음
+Tax, 세금
+Sorry, there is no available method for your address, 죄송합니다. 귀하의 주소에 사용 가능한 방법이 없습니다
+Please enter a shipping address in order to see shipping quotes, 배송 견적을 보려면 배송 주소를 입력하십시오
+Continue to payment, 결제 계속
+No payment method available, 사용 가능한 결제 방법 없음
+Ship to, 배송지
+Shipment, 배송
+Thank you ${name}!, 감사합니다, ${name}!
+Contact information, 연락처 정보
+Order #${orderNumber}, 주문 #${orderNumber}
+ADD TO CART, 장바구니에 추가
+Please select variant options, 옵션 선택
+VIEW CART (${count}), 장바구니 보기 (${count})
+JUST ADDED TO YOUR CART, 방금 장바구니에 추가됨
+Promotion code?, 프로모션 코드?
+Enter coupon code, 쿠폰 코드 입력
+Apply, 적용
+Your cart is empty!, 장바구니가 비어 있습니다!
+Full name, 전체 이름
+Telephone, 전화
+Address, 주소
+City, 도시
+Country, 국가
+Postcode, 우편번호
+Inclusive of tax, 세금 포함
+Sorry, there is no available method for your address, 죄송합니다, 귀하의 주소에 사용 가능한 방법이 없습니다.
+Full name is required, 전체 이름 필요
+Telephone is required, 전화 필요
+Address is required, 주소 필요
+City is required, 도시 필요
+Country is required, 국가 필요
+Postcode is required, 우편번호 필요
+Contact, 연락처
