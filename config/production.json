@@ -1,0 +1,34 @@
+{
+    "shop" : {
+        "currency": "KRW",
+        "language": "ko",
+        "weightUnit": "g"
+    },
+    "themeConfig": {
+        "headTags": {
+            "links": [
+                {
+                    "rel": "icon",
+                    "href": "/favicon.ico"
+                }
+            ]
+        }
+    },
+    "system": {
+        "file_storage": "s3",
+        "extensions": [
+            {
+                "name": "s3_file_storage",
+                "resolve": "node_modules/@evershop/s3_file_storage",
+                "enabled": true,
+                "priority": 10
+            },
+            {
+                "name": "product_review",
+                "resolve": "node_modules/@evershop/product_review",
+                "enabled": true,
+                "priority": 10
+            }
+        ]
+    }
+}
