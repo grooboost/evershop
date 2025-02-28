@@ -1,5 +1,4 @@
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
-const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');
 const {
   getGoogleAuthUrl
 } = require('@evershop/firebase_login/services/getGoogleAuthUrl');
@@ -12,7 +11,7 @@ module.exports = (request, response, delegate, next) => {
     return;
   }
   const client_id = process.env.CLIENT_ID;
-  const homeUrl = getConfig('shop.homeUrl', 'http://localhost:3000');
+  const homeUrl = process.env.ROOT_URL;
   const redirect_uri = `${homeUrl}${buildUrl('callbackGoogle')}`;
   const googleAuthUrl = getGoogleAuthUrl(client_id, redirect_uri);
   response.redirect(googleAuthUrl);

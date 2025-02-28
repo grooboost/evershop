@@ -1,6 +1,5 @@
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
-const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');
 const {
   getGoogleAuthToken
 } = require('@evershop/firebase_login/services/getGoogleAuthToken');
@@ -16,12 +15,12 @@ const { error } = require('@evershop/evershop/src/lib/log/logger');
 /* eslint-disable-next-line no-unused-vars */
 module.exports = async (request, response, delegate, next) => {
   const { code } = request.query;
-  const homeUrl = getConfig('shop.homeUrl', 'http://localhost:3000');
-  const redirect_uri = `${homeUrl}${buildUrl('callbackGoogle')}`;
+  const homeUrl = process.env.ROOT_URL;
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
   const successUrl = process.env.SUCCESS_REDIRECT_URL || homeUrl;
   const failureUrl = process.env.FAILURE_REDIRECT_URL || `${homeUrl}${buildUrl('login')}`;
+  const redirect_uri = `${homeUrl}${buildUrl('callbackGoogle')}`;
 
   try {
     // Get the access token from firebase using the code

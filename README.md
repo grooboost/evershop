@@ -15,3 +15,8 @@ npm run build
 ```
 gcloud app deploy
 ```
+
+## ⚙️ App engine logs
+```
+gcloud app logs tail -s default
+```
