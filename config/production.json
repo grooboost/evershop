@@ -28,6 +28,12 @@
                 "resolve": "node_modules/@evershop/product_review",
                 "enabled": true,
                 "priority": 10
+            },
+            {
+                "name": "firebase_login",
+                "resolve": "node_modules/@evershop/firebase_login",
+                "enabled": true,
+                "priority": 10
             }
         ]
     }
