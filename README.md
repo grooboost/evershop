@@ -1,3 +1,9 @@
+## ⚙️ Config
+```
+local:  .env
+prod:   .env_variables.yaml
+```
+
 ## ⚙️ Test
 
 ```

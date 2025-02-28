@@ -8,7 +8,7 @@ import NaverIcon from './icons/NaverIcon';
 import GoogleIcon from './icons/GoogleIcon';
 import EmailIcon from './icons/EmailIcon';
 
-function FirebaseLogin({ gauthUrl }) {
+function FirebaseLogin({ nauthUrl, gauthUrl }) {
   return (
     <div>
       <a href="#" className="firebase__login__button_kakao">
@@ -20,7 +20,7 @@ function FirebaseLogin({ gauthUrl }) {
         {`Apple로 계속하기`}
       </a>
       <div className='firebase__login__buttons_wrapper'>
-        <a href="#" className="firebase__login__button_small">
+        <a href={nauthUrl} className="firebase__login__button_small">
           <NaverIcon />
           {`네이버`}
         </a>
@@ -50,6 +50,7 @@ export const layout = {
 
 export const query = `
   query Query {
+    nauthUrl: url(routeId: "authNaver")
     gauthUrl: url(routeId: "authGoogle")
   }
 `;
