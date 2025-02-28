@@ -4,14 +4,15 @@ const { getAuth, signInWithCredential, signInWithCustomToken, GoogleAuthProvider
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: getConfig("firebase_login.apiKey"),
-  authDomain: getConfig("firebase_login.authDomain"),
-  projectId: getConfig("firebase_login.projectId"),
-  storageBucket: getConfig("firebase_login.storageBucket"),
-  messagingSenderId: getConfig("firebase_login.messagingSenderId"),
-  appId: getConfig("firebase_login.appId"),
-  measurementId: getConfig("firebase_login.measurementId"),
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID,
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 

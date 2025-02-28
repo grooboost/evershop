@@ -36,18 +36,20 @@ Edit the `config/default.json` file in the root directory of your EverShop insta
 
 ### Step 3: Add the Firebase client ID, secret and some other configuration options
 
-Edit the `config/default.json` file:
+Edit the `.env` file:
 
-```json
-{
-  ...,
-  "firebase_login": {
-    "client_id": "YOUR_GOOGLE_CLIENT_ID",
-    "client_secret": "YOUR_GOOGLE_CLIENT_SECRET",
-    "success_redirect_url": "http://localhost:3000",
-    "failure_redirect_url": "http://localhost:3000/account/login"
-  }
-}
+```shell
+API_KEY="YOUR_FIREBASE_API_KEY"
+AUTH_DOMAIN="YOUR_AUTH_DOMAIN"
+PROJECT_ID="YOUR_PROJECT"
+STORAGE_BUCKET="YOUR_STORAGE_BUCKET"
+MESSAGING_SENDER_ID="YOUR_MESSAGING_SENDER_ID"
+APP_ID="YOUR_APP_ID"
+MEASUREMENT_ID="YOUR_MEASUREMENT_ID"
+CLIENT_ID="YOUR_GOOGLE_CLIENT_ID"
+CLIENT_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
+SUCCESS_REDIRECT_URL="http://localhost:3000"
+FAILURE_REDIRECT_URL="http://localhost:3000/account/login"
 ```
 
 ### Step 4: Run the build command

@@ -11,7 +11,7 @@ module.exports = (request, response, delegate, next) => {
     response.redirect('/');
     return;
   }
-  const client_id = getConfig('firebase_login.client_id');
+  const client_id = process.env.CLIENT_ID;
   const homeUrl = getConfig('shop.homeUrl', 'http://localhost:3000');
   const redirect_uri = `${homeUrl}${buildUrl('callbackGoogle')}`;
   const googleAuthUrl = getGoogleAuthUrl(client_id, redirect_uri);

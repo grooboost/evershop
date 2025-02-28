@@ -16,15 +16,12 @@ const { error } = require('@evershop/evershop/src/lib/log/logger');
 /* eslint-disable-next-line no-unused-vars */
 module.exports = async (request, response, delegate, next) => {
   const { code } = request.query;
-  const client_id = getConfig('firebase_login.client_id');
-  const client_secret = getConfig('firebase_login.client_secret');
   const homeUrl = getConfig('shop.homeUrl', 'http://localhost:3000');
   const redirect_uri = `${homeUrl}${buildUrl('callbackGoogle')}`;
-  const successUrl = getConfig('firebase_login.success_redirect_url', homeUrl);
-  const failureUrl = getConfig(
-    'firebase_login.failure_redirect_url',
-    `${homeUrl}${buildUrl('login')}`
-  );
+  const client_id = process.env.CLIENT_ID;
+  const client_secret = process.env.CLIENT_SECRET;
+  const successUrl = process.env.SUCCESS_REDIRECT_URL || homeUrl;
+  const failureUrl = process.env.FAILURE_REDIRECT_URL || `${homeUrl}${buildUrl('login')}`;
 
   try {
     // Get the access token from firebase using the code
