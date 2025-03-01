@@ -1,33 +1,37 @@
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const {
-  getGoogleAuthToken
-} = require('@evershop/firebase_login/services/getGoogleAuthToken');
+  getKakaoAuthToken
+} = require('@evershop/firebase_login/services/getKakaoAuthToken');
 const {
-  signInWithGoogleToken
+  getCustomToken
+} = require('@evershop/firebase_login/services/getCustomToken');
+const {
+  signInWithCustomToken
 } = require('@evershop/firebase_login/services/signIn');
 const { select, insert } = require('@evershop/postgres-query-builder');
 const { error } = require('@evershop/evershop/src/lib/log/logger');
 
 /* eslint-disable-next-line no-unused-vars */
 module.exports = async (request, response, delegate, next) => {
-  const { code } = request.query;
+  const { code, state } = request.query;
   const homeUrl = process.env.ROOT_URL;
-  const client_id = process.env.CLIENT_ID;
-  const client_secret = process.env.CLIENT_SECRET;
+  const client_id = process.env.KAKAO_CLIENT_ID;
   const successUrl = process.env.SUCCESS_REDIRECT_URL || homeUrl;
   const failureUrl = process.env.FAILURE_REDIRECT_URL || `${homeUrl}${buildUrl('login')}`;
-  const redirect_uri = `${homeUrl}${buildUrl('callbackGoogle')}`;
+  const redirect_uri = `${homeUrl}${buildUrl('callbackKakao')}`;
 
   try {
     // Get the access token from firebase using the code
-    const { id_token, access_token } = await getGoogleAuthToken(
+    const { access_token } = await getKakaoAuthToken(
       code,
       client_id,
-      client_secret,
       redirect_uri
     );
-    const user = await signInWithGoogleToken(id_token, access_token);
+
+    const firebaseToken = await getCustomToken('verifyKakaoToken', access_token);
+    const user = await signInWithCustomToken(firebaseToken);
+
     const { uid, email, displayName: name } = user;
 
     // Check if the email exists in the database

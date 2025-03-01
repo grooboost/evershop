@@ -8,10 +8,10 @@ import NaverIcon from './icons/NaverIcon';
 import GoogleIcon from './icons/GoogleIcon';
 import EmailIcon from './icons/EmailIcon';
 
-function FirebaseLogin({ nauthUrl, gauthUrl }) {
+function FirebaseLogin({ kauthUrl, nauthUrl, gauthUrl }) {
   return (
     <div>
-      <a href="#" className="firebase__login__button_kakao">
+      <a href={kauthUrl} className="firebase__login__button_kakao">
         <KakaoIcon />
         {`카카오로 계속하기`}
       </a>
@@ -50,6 +50,7 @@ export const layout = {
 
 export const query = `
   query Query {
+    kauthUrl: url(routeId: "authKakao")
     nauthUrl: url(routeId: "authNaver")
     gauthUrl: url(routeId: "authGoogle")
   }
