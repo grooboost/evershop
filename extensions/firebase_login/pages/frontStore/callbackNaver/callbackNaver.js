@@ -18,8 +18,8 @@ module.exports = async (request, response, delegate, next) => {
   const homeUrl = process.env.ROOT_URL;
   const client_id = process.env.NAVER_CLIENT_ID;
   const client_secret = process.env.NAVER_CLIENT_SECRET;
-  const successUrl = process.env.SUCCESS_REDIRECT_URL || homeUrl;
-  const failureUrl = process.env.FAILURE_REDIRECT_URL || `${homeUrl}${buildUrl('login')}`;
+  const successUrl = homeUrl;
+  const failureUrl = `${homeUrl}${buildUrl('login')}`;
 
   try {
     // Get the access token from firebase using the code

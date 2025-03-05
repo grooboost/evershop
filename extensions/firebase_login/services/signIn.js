@@ -1,6 +1,5 @@
-const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');
 const { initializeApp } = require('firebase/app');
-const { getAuth, signInWithCredential, signInWithCustomToken, GoogleAuthProvider } = require("firebase/auth");
+const { getAuth, signInWithCredential, signInWithCustomToken, GoogleAuthProvider, OAuthProvider } = require("firebase/auth");
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -15,6 +14,20 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+
+module.exports.signInWithAppleToken = async (
+  idToken
+) => {
+  const provider = new OAuthProvider('apple.com');
+  const credential = provider.credential({
+    idToken
+  });
+  const result = await signInWithCredential(auth, credential)
+
+  const user = result.user;
+
+  return user;
+};
 
 module.exports.signInWithGoogleToken = async (
   idToken, accessToken

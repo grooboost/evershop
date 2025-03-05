@@ -1,38 +1,24 @@
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const {
-  getKakaoAuthToken
-} = require('@evershop/firebase_login/services/getKakaoAuthToken');
-const {
-  getCustomToken
-} = require('@evershop/firebase_login/services/getCustomToken');
-const {
-  signInWithCustomToken
+  signInWithAppleToken
 } = require('@evershop/firebase_login/services/signIn');
 const { select, insert } = require('@evershop/postgres-query-builder');
 const { error } = require('@evershop/evershop/src/lib/log/logger');
+const { generateUserId } = require('@evershop/firebase_login/utils/auth');
 
 /* eslint-disable-next-line no-unused-vars */
 module.exports = async (request, response, delegate, next) => {
-  const { code, state } = request.query;
+  console.log(request);
+  const { id_token } = request.query;
   const homeUrl = process.env.ROOT_URL;
-  const client_id = process.env.KAKAO_CLIENT_ID;
   const successUrl = homeUrl;
   const failureUrl = `${homeUrl}${buildUrl('login')}`;
-  const redirect_uri = `${homeUrl}${buildUrl('callbackKakao')}`;
 
   try {
     // Get the access token from firebase using the code
-    const { access_token } = await getKakaoAuthToken(
-      code,
-      client_id,
-      redirect_uri
-    );
-
-    const firebaseToken = await getCustomToken('verifyKakaoToken', access_token);
-    const user = await signInWithCustomToken(firebaseToken);
-
-    const { uid, email, displayName: name } = user;
+    const user = await signInWithAppleToken(id_token);
+    const { uid, email } = user;
 
     // Check if the email exists in the database
     let customer = await select()
@@ -52,7 +38,7 @@ module.exports = async (request, response, delegate, next) => {
       customer = await insert('customer')
         .given({
           email: email,
-          full_name: name,
+          full_name: generateUserId(),
           status: 1,
           is_firebase_login: true,
           password: uid
