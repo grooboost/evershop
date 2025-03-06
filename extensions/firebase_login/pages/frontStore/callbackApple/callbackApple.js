@@ -9,8 +9,7 @@ const { generateUserId } = require('@evershop/firebase_login/utils/auth');
 
 /* eslint-disable-next-line no-unused-vars */
 module.exports = async (request, response, delegate, next) => {
-  console.log(request);
-  const { id_token } = request.query;
+  const { id_token } = request.body;
   const homeUrl = process.env.ROOT_URL;
   const successUrl = homeUrl;
   const failureUrl = `${homeUrl}${buildUrl('login')}`;

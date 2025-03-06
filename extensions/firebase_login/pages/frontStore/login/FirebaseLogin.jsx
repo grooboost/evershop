@@ -40,7 +40,10 @@ function FirebaseLogin({ kauthUrl, aauthUrl, nauthUrl, gauthUrl }) {
 }
 
 FirebaseLogin.propTypes = {
-  authUrl: PropTypes.string.isRequired
+  kauthUrl: PropTypes.string.isRequired,
+  aauthUrl: PropTypes.string.isRequired,
+  nauthUrl: PropTypes.string.isRequired,
+  gauthUrl: PropTypes.string.isRequired
 };
 
 export const layout = {
