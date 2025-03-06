@@ -1,5 +1,5 @@
 const { initializeApp } = require('firebase/app');
-const { getAuth, signInWithCredential, signInWithCustomToken, GoogleAuthProvider, OAuthProvider } = require("firebase/auth");
+const { getAuth, signInWithCredential, signInWithCustomToken, signInWithEmailAndPassword, GoogleAuthProvider, OAuthProvider } = require("firebase/auth");
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -44,6 +44,15 @@ module.exports.signInWithCustomToken = async (
   customToken
 ) => {
   const result = await signInWithCustomToken(auth, customToken)
+  const user = result.user;
+
+  return user;
+};
+
+module.exports.signInWithEmail = async (
+  email, password
+) => {
+  const result = await signInWithEmailAndPassword(auth, email, password)
   const user = result.user;
 
   return user;
