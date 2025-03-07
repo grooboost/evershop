@@ -11,7 +11,15 @@
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 400;
-    text-align: center;
+    text-align: left;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    text-align: left;
+    color: #616161;
   }
 
   .form-submit-button {
@@ -33,5 +41,24 @@
   }
   .login-form-inner {
     width: 100%;
+    display: flex;
+    flex-direction: column;  /* 컬럼 방향으로 아이템들을 정렬 */
+    gap: 20px;              /* 아이템 간 간격을 20px로 설정 */
+  }
+  
+  .text-left {
+    white-space: pre-line;
+  }
+}
+
+/* 뷰포트 너비에 따라 다른 폰트 사이즈 적용 */
+@media (max-width: 600px) {
+  .login-form {
+    h1 {
+      font-size: 2.4rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+    }
   }
 }

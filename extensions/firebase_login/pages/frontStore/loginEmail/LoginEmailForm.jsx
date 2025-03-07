@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Field } from '@components/common/form/Field';
 import { Form } from '@components/common/form/Form';
-import './AuthEmailForm.scss';
+import './LoginEmailForm.scss';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 import Area from '@components/common/Area';
 
-export default function AuthEmailForm({
+export default function LoginEmailForm({
   action,
   homeUrl,
   registerUrl,
@@ -18,7 +18,7 @@ export default function AuthEmailForm({
     <div className="flex justify-center items-center">
       <div className="login-form flex justify-center items-center">
         <div className="login-form-inner">
-          <h1 className="text-center">{_('Login')}</h1>
+          <h1 className="text-left">{`이메일로\n로그인/회원가입`}</h1>
           {error && <div className="text-critical mb-4">{error}</div>}
           <Form
             id="loginForm"
@@ -72,7 +72,7 @@ export default function AuthEmailForm({
   );
 }
 
-AuthEmailForm.propTypes = {
+LoginEmailForm.propTypes = {
   action: PropTypes.string.isRequired,
   homeUrl: PropTypes.string.isRequired,
   registerUrl: PropTypes.string.isRequired,

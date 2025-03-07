@@ -1,7 +1,7 @@
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const {
   getGoogleAuthUrl
-} = require('@evershop/firebase_login/services/getGoogleAuthUrl');
+} = require('@evershop/firebase_login/services/auth/getGoogleAuthUrl');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (request, response, delegate, next) => {
