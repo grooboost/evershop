@@ -1,10 +1,15 @@
 const { initializeApp } = require('firebase/app');
-const { getAuth, signInWithCredential, signInWithCustomToken, signInWithEmailAndPassword, GoogleAuthProvider, OAuthProvider } = require("firebase/auth");
+const { 
+  getAuth, signInWithCredential, signInWithCustomToken, signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, sendEmailVerification,
+  updatePassword, updateProfile,
+  GoogleAuthProvider, OAuthProvider, AuthErrorCodes } = require("firebase/auth");
 
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const { select, insert } = require('@evershop/postgres-query-builder');
 const { error } = require('@evershop/evershop/src/lib/log/logger');
+const { generateDeterministicPassword } = require('@evershop/firebase_login/utils/auth');
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -118,3 +123,93 @@ module.exports.signInWithEmail = async (
 
   return user;
 };
+
+module.exports.signUpWithVerifiedEmail = async (
+  email, password, name
+) => {
+  try {
+    const tempPassword = generateDeterministicPassword(email);
+    const result = await signInWithEmailAndPassword(auth, email, tempPassword)
+    const user = result.user;
+  
+    if (!user) {
+      throw new Error('No valid user found.');
+    } else if (!user.emailVerified) {
+      throw new Error('이메일 인증을 완료한 후 다시 시도해주세요.');
+    } else {
+      console.log('[user]', user);
+      await updateProfile(user, { displayName: name });
+      await updatePassword(user, password);
+    }
+  
+    return user;
+  } catch (error) {
+    const { code } = error;
+    switch (code) {
+      case AuthErrorCodes.USER_DELETED:
+        throw new Error("이메일 인증을 완료한 후 다시 시도해주세요.");
+      default:
+        console.error('Error registering email: ', error);
+    }
+    throw error;
+  }
+};
+
+async function createOrSignInTempAccount(email) {
+  const password = generateDeterministicPassword(email);
+  try {
+    const credential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    return credential;
+  } catch (error) {
+    const { code } = error;
+    switch (code) {
+      case AuthErrorCodes.EMAIL_EXISTS:
+        const signInCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        return signInCredential;
+      default:
+        throw error;
+    }
+  }
+}
+
+module.exports.createTempEmailAccountAndSendVerfication = async (email) => {
+  try {
+    const credential = await createOrSignInTempAccount(email);
+    await sendEmailVerification(credential.user);
+  } catch (error) {
+    const { code } = error;
+    switch (code) {
+      case AuthErrorCodes.TOO_MANY_ATTEMPTS_TRY_LATER:
+        throw new Error('Too many request');
+      case AuthErrorCodes.INVALID_PASSWORD:
+        throw new Error('Email already in use');
+      case AuthErrorCodes.INTERNAL_ERROR:
+        throw new Error('Bad request');
+      default:
+        console.error('Error sending email: ', error);
+    }
+    throw error;
+  }
+}
+
+module.exports.isVerified = async (email) => {
+  const password = generateDeterministicPassword(email);
+  try {
+    const credential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    return credential.user.emailVerified;
+  } catch (error) {
+    return false;
+  }
+}
