@@ -24,36 +24,18 @@ export function AddressSummary({ address }) {
         },
         {
           component: {
-            default: ({ address1 }) => (
-              <div className="address-one">{address1}</div>
-            )
-          },
-          props: {
-            address1: address.address1
-          },
-          sortOrder: 20,
-          id: 'address1'
-        },
-        {
-          component: {
-            default: ({ city, province, postcode, country }) => (
-              <div className="city-province-postcode">
-                <div>{`${postcode}, ${city}`}</div>
-                <div>
-                  {province && <span>{province.name}, </span>}{' '}
-                  <span>{country.name}</span>
-                </div>
-              </div>
+            default: ({ city, province, postcode, address1 }) => (
+              <div className="address-one">{`[${postcode}] ${province.name} ${city} ${address1}`}</div>
             )
           },
           props: {
             city: address.city,
             province: address.province,
             postcode: address.postcode,
-            country: address.country
+            address1: address.address1
           },
-          sortOrder: 40,
-          id: 'cityProvincePostcode'
+          sortOrder: 20,
+          id: 'fullAaddress'
         },
         {
           component: {
