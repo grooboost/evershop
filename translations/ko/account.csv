@@ -29,6 +29,9 @@ Postcode, 우편번호
 Edit address, 배송지 주소 관리
 Save, 저장
 Close, 닫기
+Edit, 수정
+Make default, 기본 배송지로 선택
+Delete, 삭제
 Postcode is required, 우편번호는 필수입니다
 Telephone is required, 전화번호는 필수입니다
 Telephone, 전화
