@@ -31,6 +31,8 @@
     animation-name: fadeOut;
   }
   .modal {
+    max-height: 90vh; /* 뷰포트의 90% 높이 */
+    overflow-y: auto; /* 내용이 넘치면 스크롤바 표시 */
     min-width: 50rem;
     max-width: 50%;
     position: relative;
