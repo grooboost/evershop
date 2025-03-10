@@ -2,7 +2,7 @@ const { initializeApp } = require('firebase/app');
 const { 
   getAuth, signInWithCredential, signInWithCustomToken, signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, sendEmailVerification,
-  updatePassword, updateProfile,
+  updatePassword, updateProfile, sendPasswordResetEmail,
   GoogleAuthProvider, OAuthProvider, AuthErrorCodes } = require("firebase/auth");
 
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
@@ -212,4 +212,8 @@ module.exports.isVerified = async (email) => {
   } catch (error) {
     return false;
   }
+}
+
+module.exports.resetPassword = async (email) => {
+  await sendPasswordResetEmail(auth, email)
 }
