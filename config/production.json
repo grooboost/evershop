@@ -34,6 +34,12 @@
                 "resolve": "node_modules/@evershop/firebase_login",
                 "enabled": true,
                 "priority": 10
+            },
+            {
+                "name": "otable",
+                "resolve": "node_modules/@evershop/otable",
+                "enabled": true,
+                "priority": 10
             }
         ]
     }
