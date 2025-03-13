@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { CustomerAddressForm } from '@evershop/otable/components/customer/address/addressForm/AddressForm';
+import { CustomerAddressForm } from '@evershop/otable/components/frontStore/customer/address/addressForm/AddressForm';
 
 export default function Index({
   display,

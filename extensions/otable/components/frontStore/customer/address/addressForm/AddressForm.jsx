@@ -42,6 +42,13 @@ export function CustomerAddressForm({
   const [selectedPostcode, setSelectedPostcode] = useState(address?.postcode || '');
 
   useEffect(() => {
+    setName(address?.fullName || '');
+    setPhone(address?.telephone || '');
+    setSelectedAddress(address?.address1 || '');
+    setSelectedPostcode(address?.postcode || '');
+  }, [address])
+
+  useEffect(() => {
     if (searchedAddress) {
       const addr =
         searchedAddress.userSelectedType === 'R' ? searchedAddress.roadAddress : searchedAddress.jibunAddress;

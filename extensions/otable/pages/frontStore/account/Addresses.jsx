@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AddressSummary } from '@components/common/customer/address/AddressSummary';
-import CustomerAddressForm from '@evershop/otable/components/customer/address/addressForm/Index';
+import CustomerAddressForm from '@evershop/otable/components/frontStore/customer/address/addressForm/Index';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 import { useModal } from '@components/common/modal/useModal';
 import { Form } from '@components/common/form/Form';
 import { toast } from 'react-toastify';
-import { AddressSearch } from '@evershop/otable/components/customer/address/addressForm/AddressSearch';
+import { AddressSearch } from '@evershop/otable/components/frontStore/customer/address/addressForm/AddressSearch';
 
 export default function Addresses({
   account: { addresses, addAddressApi },
@@ -18,6 +18,10 @@ export default function Addresses({
 
   const [display, setDisplay] = useState(false);
   const [searchedAddress, setSearchedAddress] = useState(null);
+
+  const onOpenSearch = () => {
+    setDisplay(true);
+  }
 
   const onSearch = (data) => {
     setSearchedAddress(data);
@@ -195,7 +199,7 @@ export default function Addresses({
                     display={!display}
                     address={editingAddress.current}
                     customerAddressSchema={customerAddressSchema}
-                    onOpenSearch={() => setDisplay(true)}
+                    onOpenSearch={onOpenSearch}
                     searchedAddress={searchedAddress}
                   />
                 </Form>
