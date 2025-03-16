@@ -1,0 +1,4 @@
+extend type Setting {
+  pgtempSecretKey: String
+  pgtempEndpointSecret: String
+}

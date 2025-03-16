@@ -1,0 +1,4 @@
+{
+  "methods": ["GET"],
+  "path": "/pgtemp/return"
+}

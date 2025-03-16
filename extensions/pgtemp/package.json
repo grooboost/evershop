@@ -1,0 +1,24 @@
+{
+  "name": "@evershop/pgtemp",
+  "version": "1.0.0",
+  "description": "A Pgtemp payment extension for EverShop.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evershopcommerce/evershop/tree/main/packages/pgtemp"
+  },
+  "keywords": [
+    "EverShop pgtemp payment"
+  ],
+  "author": "The Nguyen (https://evershop.io/)",
+  "license": "GNU GENERAL PUBLIC LICENSE 3.0",
+  "bugs": {
+    "url": "https://github.com/evershopcommerce/evershop/issues"
+  },
+  "homepage": "https://github.com/evershopcommerce/evershop/tree/main/packages/pgtemp",
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "dependencies": {
+    "firebase": "^11.3.1"
+  }
+}

@@ -1,0 +1,6 @@
+extend type Setting {
+  pgtempPaymentStatus: Int
+  pgtempDislayName: String
+  pgtempPublishableKey: String
+  pgtempPaymentMode: String
+}

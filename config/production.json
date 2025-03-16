@@ -40,6 +40,12 @@
                 "resolve": "node_modules/@evershop/otable",
                 "enabled": true,
                 "priority": 10
+            },
+            {
+                "name": "pgtemp",
+                "resolve": "node_modules/@evershop/pgtemp",
+                "enabled": true,
+                "priority": 10
             }
         ]
     }
