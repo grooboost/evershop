@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useCheckoutSteps,
   useCheckoutStepsDispatch
@@ -19,14 +19,14 @@ export default function ShipmentStep({
   setting: { customerAddressSchema }
 }) {
   const steps = useCheckoutSteps();
-  const [shipmentInfo, setShipmentInfo] = React.useState({
+  const [shipmentInfo, setShipmentInfo] = useState({
     address: shippingAddress
   });
   const step = steps.find((e) => e.id === 'shipment') || {};
-  const [display, setDisplay] = React.useState(false);
+  const [display, setDisplay] = useState(false);
   const { canStepDisplay, addStep } = useCheckoutStepsDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     addStep({
       id: 'shipment',
       title: _('Shipment'),
@@ -40,7 +40,7 @@ export default function ShipmentStep({
     });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setDisplay(canStepDisplay(step, steps));
   });
 
