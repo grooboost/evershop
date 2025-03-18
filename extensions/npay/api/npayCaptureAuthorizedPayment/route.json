@@ -1,0 +1,5 @@
+{
+  "methods": ["POST"],
+  "path": "/npay/authorizations/capture",
+  "access": "public"
+}

@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@evershop/firebase_login": "^1.0.0",
+    "@evershop/npay": "^1.0.0",
     "@evershop/otable": "^1.0.0",
     "@evershop/pgtemp": "^1.0.0",
     "@evershop/product_review": "^1.1.0",

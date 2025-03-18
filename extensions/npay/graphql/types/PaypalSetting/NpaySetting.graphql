@@ -1,0 +1,4 @@
+extend type Setting {
+  npayDislayName: String
+  npayEnvironment: String
+}

@@ -46,6 +46,12 @@
                 "resolve": "node_modules/@evershop/pgtemp",
                 "enabled": true,
                 "priority": 10
+            },
+            {
+                "name": "npay",
+                "resolve": "node_modules/@evershop/npay",
+                "enabled": true,
+                "priority": 10
             }
         ]
     }

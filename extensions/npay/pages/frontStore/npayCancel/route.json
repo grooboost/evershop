@@ -1,0 +1,4 @@
+{
+  "methods": ["GET"],
+  "path": "/npay/cancelling/:order_id"
+}
