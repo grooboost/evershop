@@ -12,27 +12,35 @@ async function voidPaymentTransaction(orderID) {
     if (!transaction) {
       return;
     }
-    const axiosInstance = await createAxiosInstance({
-      app: {
-        locals: {}
-      }
-    });
+  
+    const amountInt = Math.floor(transaction.amount);
 
-    // Get the transaction details from Npay
-    const responseData = await axiosInstance.get(
-      `/v2/payments/authorizations/${transaction.transaction_id}`
+    // Call API to authorize the npay order using axios
+    // ref. https://developers.pay.naver.com/docs/v2/api#payments-payments_cancel
+    const axiosInstance = await createAxiosInstance();
+    const responseData = await axiosInstance.post(
+      `/v1/cancel`,
+      {
+        paymentId: transaction.transaction_id,
+        cancelAmount: amountInt,
+        cancelReason: 'cancel_from_admin',
+        cancelRequester: '2',
+        taxScopeAmount: amountInt,
+        taxExScopeAmount: 0,
+      },
+      {
+        headers: {
+          'X-NaverPay-Idempotency-Key': `${transaction.transaction_id}-cancel`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      },
     );
-    // If the transaction is already voided, return
-    if (responseData.data.status === 'VOIDED') {
-      return;
-    } else if (responseData.data.status === 'CREATED') {
-      // If the transaction is not yet captured, void it
-      await axiosInstance.post(
-        `/v2/payments/authorizations/${transaction.transaction_id}/void`
-      );
+  
+    const { code, message } = responseData.data;
+    if (code === 'Success') {
+      // do nothing
     } else {
-      // Thrown an error if the transaction is already captured
-      throw new Error('Transaction is either pending or already captured');
+      throw new Error(message);
     }
   } catch (err) {
     error(err);

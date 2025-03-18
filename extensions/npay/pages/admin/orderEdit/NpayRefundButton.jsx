@@ -10,7 +10,7 @@ import { Field } from '@components/common/form/Field';
 
 export default function NpayRefundButton({
   refundAPI,
-  order: { paymentStatus, orderId, paymentMethod, grandTotal }
+  order: { paymentStatus, uuid, paymentMethod, grandTotal }
 }) {
   const { openAlert, closeAlert, dispatchAlert } = useAlertContext();
   return (
@@ -67,7 +67,7 @@ export default function NpayRefundButton({
                           suffix={grandTotal.currency}
                         />
                       </div>
-                      <input type="hidden" name="order_id" value={orderId} />
+                      <input type="hidden" name="order_id" value={uuid} />
                     </Form>
                   </div>
                 ),
@@ -107,7 +107,7 @@ NpayRefundButton.propTypes = {
     paymentStatus: PropTypes.shape({
       code: PropTypes.string.isRequired
     }).isRequired,
-    orderId: PropTypes.string.isRequired,
+    uuid: PropTypes.string.isRequired,
     paymentMethod: PropTypes.string.isRequired,
     grandTotal: PropTypes.shape({
       value: PropTypes.number.isRequired,
@@ -123,9 +123,9 @@ export const layout = {
 
 export const query = `
   query Query {
-    refundAPI: url(routeId: "refundPaymentIntent")
+    refundAPI: url(routeId: "npayRefundPayment")
     order(uuid: getContextValue("orderId")) {
-      orderId
+      uuid
       grandTotal {
         value
         currency

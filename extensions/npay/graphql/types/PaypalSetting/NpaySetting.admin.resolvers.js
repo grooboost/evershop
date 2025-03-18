@@ -56,6 +56,18 @@ module.exports = {
         return null;
       }
     },
+    npayChainId: (setting) => {
+      const npayConfig = getConfig('system.npay', {});
+      if (npayConfig.clientId) {
+        return npayConfig.clientId;
+      }
+      const npayChainId = setting.find((s) => s.name === 'npayChainId');
+      if (npayChainId) {
+        return npayChainId.value;
+      } else {
+        return null;
+      }
+    },
     npayWebhookSecret: (setting, _, { user }) => {
       const npayConfig = getConfig('system.npay', {});
       if (npayConfig.webhookSecret) {

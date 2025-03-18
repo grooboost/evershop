@@ -10,6 +10,7 @@ export default function NpayPayment({
     npayDislayName,
     npayClientId,
     npayClientSecret,
+    npayChainId,
     npayEnvironment,
     npayPaymentIntent
   }
@@ -74,6 +75,21 @@ export default function NpayPayment({
       <Card.Session>
         <div className="grid grid-cols-3 gap-8">
           <div className="col-span-1 items-center flex">
+            <h4>Chain ID</h4>
+          </div>
+          <div className="col-span-2">
+            <Field
+              type="text"
+              name="npayChainId"
+              placeholder="Chain ID"
+              value={npayChainId}
+            />
+          </div>
+        </div>
+      </Card.Session>
+      <Card.Session>
+        <div className="grid grid-cols-3 gap-8">
+          <div className="col-span-1 items-center flex">
             <h4>Environment</h4>
           </div>
           <div className="col-span-2">
@@ -85,11 +101,17 @@ export default function NpayPayment({
               options={[
                 {
                   text: 'Sandbox',
-                  value: 'https://dev-pub.apis.naver.com/naverpay-partner/naverpay/payments'
+                  value: JSON.stringify({
+                    base: 'https://dev-pub.apis.naver.com/naverpay-partner/naverpay/payments',
+                    approve: 'https://test-m.pay.naver.com/z/payments',
+                  })
                 },
                 {
                   text: 'Live',
-                  value: 'https://pub.apis.naver.com/naverpay-partner/naverpay/payments'
+                  value: JSON.stringify({
+                    base: 'https://pub.apis.naver.com/naverpay-partner/naverpay/payments',
+                    approve: 'https://m.pay.naver.com/z/payments',
+                  })
                 }
               ]}
             />
@@ -125,6 +147,7 @@ NpayPayment.propTypes = {
     npayDislayName: PropTypes.string,
     npayClientId: PropTypes.string,
     npayClientSecret: PropTypes.string,
+    npayChainId: PropTypes.string,
     npayEnvironment: PropTypes.string,
     npayPaymentIntent: PropTypes.string
   })
@@ -136,7 +159,8 @@ NpayPayment.defaultProps = {
     npayDislayName: '',
     npayClientId: '',
     npayClientSecret: '',
-    npayEnvironment: '',
+    npayChainId: '',
+    npayEnvironment: '{}',
     npayPaymentIntent: 'CAPTURE'
   }
 };
@@ -153,6 +177,7 @@ export const query = `
       npayDislayName
       npayClientId
       npayClientSecret
+      npayChainId
       npayEnvironment
       npayPaymentIntent
     }

@@ -9,60 +9,55 @@ const {
 const { getSetting } = require('@evershop/evershop/src/modules/setting/services/setting');
 
 module.exports = async (request, response, delegate, next) => {
-  // Get npay token from query string
-  const npayToken = request.query.token;
-  if (npayToken) {
-    // eslint-disable-next-line camelcase
-    const { order_id } = request.params;
-    const query = select().from('order');
-    query
-      .where('uuid', '=', order_id)
-      .and('integration_order_id', '=', npayToken)
-      .and('payment_method', '=', 'npay')
-      .and('payment_status', '=', 'pending');
+    // Get npay token from query string
+  // eslint-disable-next-line camelcase
+  const { paymentId } = request.query;
+  const { order_id } = request.params;
+  const query = select().from('order');
+  query
+    .where('uuid', '=', order_id)
+    .and('payment_method', '=', 'npay')
+    .and('payment_status', '=', 'pending');
 
-    const order = await query.load(pool);
-    if (!order) {
-      response.redirect(302, buildUrl('homepage'));
-    } else {
-      try {
-        // Call API using Axios to capture/authorize the payment
-        const paymentIntent = await getSetting(
-          'npayPaymentIntent',
-          'CAPTURE'
-        );
-        const responseData = await axios.post(
-          `${getContextValue(request, 'homeUrl')}${buildUrl(
-            paymentIntent === 'CAPTURE'
-              ? 'npayCapturePayment'
-              : 'npayAuthorizePayment'
-          )}`,
-          {
-            // eslint-disable-next-line camelcase
-            order_id
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              // Include all cookies from the current request
-              Cookie: request.headers.cookie
-            }
-          }
-        );
-        if (responseData.data.error) {
-          throw new Error(responseData.data.error.message);
-        }
-        // Emit event to add order placed event
-        await emit('order_placed', { ...order });
-        // Redirect to order success page
-        // eslint-disable-next-line camelcase
-        response.redirect(302, `${buildUrl('checkoutSuccess')}/${order_id}`);
-      } catch (e) {
-        next();
-      }
-    }
-  } else {
-    // Redirect to homepage if no token
+  const order = await query.load(pool);
+  if (!order) {
     response.redirect(302, buildUrl('homepage'));
+  } else {
+    try {
+      // Call API using Axios to capture/authorize the payment
+      const paymentIntent = await getSetting(
+        'npayPaymentIntent',
+        'CAPTURE'
+      );
+      const responseData = await axios.post(
+        `${getContextValue(request, 'homeUrl')}${buildUrl(
+          paymentIntent === 'CAPTURE'
+            ? 'npayCapturePayment'
+            : 'npayAuthorizePayment'
+        )}`,
+        {
+          // eslint-disable-next-line camelcase
+          order_id,
+          payment_id: paymentId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Include all cookies from the current request
+            Cookie: request.headers.cookie
+          }
+        }
+      );
+      if (responseData.data.error) {
+        throw new Error(responseData.data.error.message);
+      }
+      // Emit event to add order placed event
+      await emit('order_placed', { ...order });
+      // Redirect to order success page
+      // eslint-disable-next-line camelcase
+      response.redirect(302, `${buildUrl('checkoutSuccess')}/${order_id}`);
+    } catch (e) {
+      next();
+    }
   }
 };

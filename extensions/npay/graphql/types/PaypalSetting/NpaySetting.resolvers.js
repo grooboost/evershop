@@ -23,7 +23,7 @@ module.exports = {
       if (npayEnvironment) {
         return npayEnvironment.value;
       } else {
-        return 'https://dev-pub.apis.naver.com/naverpay-partner/naverpay/payments';
+        return {};
       }
     }
   }

@@ -2,6 +2,7 @@ extend type Setting {
   npayPaymentStatus: Int
   npayClientId: String
   npayClientSecret: String
+  npayChainId: String
   npayWebhookSecret: String
   npayPaymentIntent: String
 }

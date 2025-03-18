@@ -15,7 +15,7 @@ const { createAxiosInstance } = require('@evershop/npay/services/requester');
 module.exports = async (request, response, delegate, next) => {
   try {
     // eslint-disable-next-line camelcase
-    const { order_id } = request.body;
+    const { order_id, payment_id } = request.body;
     // Validate the order;
     const order = await select()
       .from('order')
@@ -31,32 +31,37 @@ module.exports = async (request, response, delegate, next) => {
         }
       });
     } else {
-      // Call API to authorize the npay order using axios
+      // Call API to confirm the npay order using axios
+      // ref. https://developers.pay.naver.com/docs/v2/api#payments-payments_confirm
       const axiosInstance = await createAxiosInstance(request);
       const responseData = await axiosInstance.post(
-        `/v2/checkout/orders/${order.integration_order_id}/capture`
+        `/v1/purchase-confirm`,
+        {
+          paymentId: payment_id,
+          requester: '2',
+        },
+        {
+          headers: {
+            'X-NaverPay-Idempotency-Key': `${order_id}-confirm`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        },
       );
 
-      if (responseData.data.status === 'COMPLETED') {
+      const { code, message } = responseData.data;
+      if (code === 'Success') {
         // Update payment status
         await updatePaymentStatus(order.order_id, 'paid');
         // Add transaction data to database
         await insert('payment_transaction')
           .given({
             payment_transaction_order_id: order.order_id,
-            transaction_id:
-              responseData.data.purchase_units[0].payments.captures[0].id,
-            amount:
-              responseData.data.purchase_units[0].payments.captures[0].amount
-                .value,
-            currency:
-              responseData.data.purchase_units[0].payments.captures[0].amount
-                .currency_code,
-            status:
-              responseData.data.purchase_units[0].payments.captures[0].status,
-            payment_action: 'capture',
-            transaction_type: 'online',
-            additional_information: JSON.stringify(responseData.data)
+            transaction_id: payment_id,
+            amount: order.grand_total,
+            currency: order.currency,
+            status: 'captured',
+            payment_action: 'authorize',
+            transaction_type: 'online'
           })
           .execute(pool);
 
@@ -64,7 +69,7 @@ module.exports = async (request, response, delegate, next) => {
         await insert('order_activity')
           .given({
             order_activity_order_id: order.order_id,
-            comment: `Customer paid using PayPal. Transaction ID: ${responseData.data.purchase_units[0].payments.captures[0].id}`,
+            comment: `Customer paid using Npay. Transaction ID: ${payment_id}`,
             customer_notified: 0
           })
           .execute(pool);
@@ -81,6 +86,7 @@ module.exports = async (request, response, delegate, next) => {
             message: responseData.data.message
           }
         });
+        return;
       }
     }
   } catch (err) {

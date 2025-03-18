@@ -1,0 +1,5 @@
+{
+  "methods": ["POST"],
+  "path": "/npay/refundTransactions",
+  "access": "public"
+}

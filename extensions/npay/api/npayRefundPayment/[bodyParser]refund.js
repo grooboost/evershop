@@ -15,13 +15,11 @@ const { createAxiosInstance } = require('@evershop/npay/services/requester');
 module.exports = async (request, response, delegate, next) => {
   try {
     // eslint-disable-next-line camelcase
-    const { order_id, payment_id } = request.body;
+    const { order_id } = request.body;
     // Validate the order;
     const order = await select()
       .from('order')
       .where('uuid', '=', order_id)
-      .and('payment_method', '=', 'npay')
-      .and('payment_status', '=', 'pending')
       .load(pool);
 
     if (!order) {
@@ -29,51 +27,52 @@ module.exports = async (request, response, delegate, next) => {
       response.json({
         error: {
           status: INVALID_PAYLOAD,
-          message: 'Invalid order'
+          message: 'Invalid order id'
         }
       });
     } else {
+      const transaction = await select()
+        .from('payment_transaction')
+        .where('payment_transaction_order_id', '=', order.order_id)
+        .load(pool);
+      if (!transaction) {
+        response.status(INVALID_PAYLOAD);
+        response.json({
+          error: {
+            status: INVALID_PAYLOAD,
+            message: 'Not found transaction'
+          }
+        });
+        return;
+      }
+    
+      const amountInt = Math.floor(transaction.amount);
+  
       // Call API to authorize the npay order using axios
-      // ref. https://developers.pay.naver.com/docs/v2/api#payments-payments_apply
+      // ref. https://developers.pay.naver.com/docs/v2/api#payments-payments_cancel
       const axiosInstance = await createAxiosInstance(request);
       const responseData = await axiosInstance.post(
-        `/v2.2/apply/payment`,
-        { paymentId: payment_id },
+        `/v1/cancel`,
+        {
+          paymentId: transaction.transaction_id,
+          cancelAmount: amountInt,
+          cancelReason: 'cancel_from_admin',
+          cancelRequester: '2',
+          taxScopeAmount: amountInt,
+          taxExScopeAmount: 0,
+        },
         {
           headers: {
-            'X-NaverPay-Idempotency-Key': `${order_id}-apply`,
+            'X-NaverPay-Idempotency-Key': `${transaction.transaction_id}-cancel`,
             'Content-Type': 'application/x-www-form-urlencoded',
           }
         },
       );
 
       const { code, message } = responseData.data;
-      const { paymentId, detail } = responseData.data.body
       if (code === 'Success') {
         // Update payment status
-        await updatePaymentStatus(order.order_id, 'authorized');
-        // Add transaction data to database
-        await insert('payment_transaction')
-          .given({
-            payment_transaction_order_id: order.order_id,
-            transaction_id: payment_id,
-            amount: order.grand_total,
-            currency: order.currency,
-            status: detail.admissionState,
-            payment_action: 'authorize',
-            transaction_type: 'online',
-            additional_information: JSON.stringify(responseData.data)
-          })
-          .execute(pool);
-
-        // Save order activities
-        await insert('order_activity')
-          .given({
-            order_activity_order_id: order.order_id,
-            comment: `Customer authorized the payment using Npay. Transaction ID: ${paymentId}`,
-            customer_notified: 0
-          })
-          .execute(pool);
+        await updatePaymentStatus(order.order_id, 'refunded');
 
         response.status(OK);
         response.json({
@@ -87,6 +86,7 @@ module.exports = async (request, response, delegate, next) => {
             message: responseData.data.message
           }
         });
+        return;
       }
     }
   } catch (err) {
@@ -95,7 +95,7 @@ module.exports = async (request, response, delegate, next) => {
     response.json({
       error: {
         status: INTERNAL_SERVER_ERROR,
-        message: err.message
+        message: 'Internal server error'
       }
     });
   }

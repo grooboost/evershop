@@ -48,12 +48,26 @@ module.exports = async (request, response, delegate, next) => {
         });
         return;
       }
+
+      // Call API to confirm the npay order using axios
+      // ref. https://developers.pay.naver.com/docs/v2/api#payments-payments_confirm
       const axiosInstance = await createAxiosInstance(request);
-      // Get the transaction details from Npay
-      const transactionDetails = await axiosInstance.get(
-        `/v2/payments/authorizations/${transaction.transaction_id}`
+      const responseData = await axiosInstance.post(
+        `/v1/purchase-confirm`,
+        {
+          paymentId: transaction.transaction_id,
+          requester: '2',
+        },
+        {
+          headers: {
+            'X-NaverPay-Idempotency-Key': `${order_id}-confirm`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        },
       );
-      if (transactionDetails.data.status === 'CAPTURED') {
+
+      const { code, message } = responseData.data;
+      if (code === 'Success') {
         // Update payment status
         await updatePaymentStatus(order.order_id, 'paid');
         // Save order activities
@@ -68,38 +82,15 @@ module.exports = async (request, response, delegate, next) => {
         response.json({
           data: {}
         });
-        return;
       } else {
-        // Call API to authorize the npay order using axios
-        const responseData = await axiosInstance.post(
-          `/v2/payments/authorizations/${transaction.transaction_id}/capture`
-        );
-        if (responseData.data.status === 'COMPLETED') {
-          // Update payment status
-          await updatePaymentStatus(order.order_id, 'paid');
-          // Save order activities
-          await insert('order_activity')
-            .given({
-              order_activity_order_id: order.order_id,
-              comment: `Captured the payment. Transaction ID: ${transaction.transaction_id}`,
-              customer_notified: 0
-            })
-            .execute(pool);
-          response.status(OK);
-          response.json({
-            data: {}
-          });
-          return;
-        } else {
-          response.status(INTERNAL_SERVER_ERROR);
-          response.json({
-            error: {
-              status: INTERNAL_SERVER_ERROR,
-              message: responseData.data.message
-            }
-          });
-          return;
-        }
+        response.status(INTERNAL_SERVER_ERROR);
+        response.json({
+          error: {
+            status: INTERNAL_SERVER_ERROR,
+            message: responseData.data.message
+          }
+        });
+        return;
       }
     }
   } catch (err) {

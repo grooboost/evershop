@@ -14,6 +14,7 @@ const { getContextValue } = require('@evershop/evershop/src/modules/graphql/serv
 const { getSetting } = require('@evershop/evershop/src/modules/setting/services/setting');
 const { toPrice } = require('@evershop/evershop/src/modules/checkout/services/toPrice');
 const { createAxiosInstance } = require('@evershop/npay/services/requester');
+const { getApiBaseUrls } = require('@evershop/npay/services/getApiBaseUrls');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
@@ -165,38 +166,45 @@ module.exports = async (request, response, delegate, next) => {
         };
       }
 
-      const finalNpayOrderData = getValueSync(
-        'finalNpayOrderData',
-        orderData,
-        {
-          order,
-          items,
-          shippingAddress,
-          billingAddress
-        }
-      );
+      const amountInt = Math.floor(order.grand_total);
+      const finalNpayOrderData = {
+        merchantPayKey: '20250317B2sFiH',
+        productName: items.map(i => i.product_name).join(", "),
+        productCount: 1,
+        totalPayAmount: amountInt,
+        taxScopeAmount: amountInt,
+        taxExScopeAmount: 0,
+        returnUrl: orderData.application_context.return_url
+      }
       // Call PayPal API to create order using axios
+      // ref. https://developers.pay.naver.com/docs/v2/api#etc-etc_pay_reserve
       const axiosInstance = await createAxiosInstance(request);
-      const { data } = await axiosInstance.post(
+      const responseData = await axiosInstance.post(
         `/v2/reserve`,
         finalNpayOrderData,
         {
-          validateStatus: (status) => status < 500
+          validateStatus: (status) => status < 500,
+          headers: {
+            'X-NaverPay-Idempotency-Key': `${order_id}-reserve`,
+          },
         }
       );
 
-      if (data.id) {
+      const { code, message } = responseData.data;
+      const { reserveId } = responseData.data.body
+      if (reserveId) {
+        const { approve } = await getApiBaseUrls();
         // Update order and insert papal order id
         await update('order')
-          .given({ integration_order_id: data.id })
+          .given({ integration_order_id: reserveId })
           .where('uuid', '=', order_id)
           .execute(pool);
 
         response.status(OK);
         return response.json({
           data: {
-            npayOrderId: data.id,
-            approveUrl: data.links.find((link) => link.rel === 'approve').href
+            npayOrderId: reserveId,
+            approveUrl: `${approve}/${reserveId}`
           }
         });
       } else {
@@ -204,7 +212,7 @@ module.exports = async (request, response, delegate, next) => {
         return response.json({
           error: {
             status: INTERNAL_SERVER_ERROR,
-            message: data.message
+            message: responseData.data.message
           }
         });
       }
