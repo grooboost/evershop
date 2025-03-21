@@ -1,0 +1,58 @@
+{
+    "shop" : {
+        "currency": "KRW",
+        "language": "ko",
+        "weightUnit": "g"
+    },
+    "themeConfig": {
+        "headTags": {
+            "links": [
+                {
+                    "rel": "icon",
+                    "href": "/favicon.ico"
+                }
+            ]
+        }
+    },
+    "system": {
+        "file_storage": "s3",
+        "extensions": [
+            {
+                "name": "s3_file_storage",
+                "resolve": "node_modules/@evershop/s3_file_storage",
+                "enabled": true,
+                "priority": 10
+            },
+            {
+                "name": "product_review",
+                "resolve": "node_modules/@evershop/product_review",
+                "enabled": true,
+                "priority": 10
+            },
+            {
+                "name": "firebase_login",
+                "resolve": "node_modules/@evershop/firebase_login",
+                "enabled": true,
+                "priority": 10
+            },
+            {
+                "name": "otable",
+                "resolve": "node_modules/@evershop/otable",
+                "enabled": true,
+                "priority": 10
+            },
+            {
+                "name": "pgtemp",
+                "resolve": "node_modules/@evershop/pgtemp",
+                "enabled": true,
+                "priority": 10
+            },
+            {
+                "name": "npay",
+                "resolve": "node_modules/@evershop/npay",
+                "enabled": true,
+                "priority": 10
+            }
+        ]
+    }
+}

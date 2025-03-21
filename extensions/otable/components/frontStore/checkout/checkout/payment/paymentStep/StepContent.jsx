@@ -8,7 +8,7 @@ import CustomerAddressForm from '@evershop/otable/components/frontStore/customer
 import { Form } from '@components/common/form/Form';
 import { BillingAddress } from '@evershop/otable/components/frontStore/checkout/checkout/payment/paymentStep/BillingAddress';
 import { useCheckout } from '@components/common/context/checkout';
-import { Field } from '@components/common/form/Field';
+import { AddressFormField } from '@evershop/otable/components/common/form/AddressFormField';
 import Button from '@components/common/form/Button';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 import Spinner from '@components/common/Spinner';
@@ -185,7 +185,7 @@ export function StepContent({
                 </div>
               ))}
             </div>
-            <Field
+            <AddressFormField
               type="hidden"
               name="method_code"
               value={

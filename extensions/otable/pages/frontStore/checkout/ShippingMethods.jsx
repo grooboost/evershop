@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useClient } from 'urql';
 import { useFormContext } from '@components/common/form/Form';
-import { Field } from '@components/common/form/Field';
+import { AddressFormField } from '@evershop/otable/components/common/form/AddressFormField';
 import { useCheckoutStepsDispatch } from '@components/common/context/checkoutSteps';
 import { useCheckout } from '@components/common/context/checkout';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
@@ -153,7 +153,7 @@ export default function ShippingMethods({
       )}
       {methods.length > 0 && (
         <div className="divide-y border rounded border-divider p-4 mb-8">
-          <Field
+          <AddressFormField
             type="radio"
             name="method"
             validationRules={['notEmpty']}

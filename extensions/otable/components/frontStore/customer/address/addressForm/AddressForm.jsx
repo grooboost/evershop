@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Field } from '@evershop/otable/components/common/form/Field';
+import { AddressFormField } from '@evershop/otable/components/common/form/AddressFormField';
 import Area from '@components/common/Area';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 import Button from '@components/common/form/Button';
@@ -69,7 +69,7 @@ export function CustomerAddressForm({
           id={areaId}
           coreComponents={[
             {
-              component: { default: Field },
+              component: { default: AddressFormField },
               props: {
                 type: 'text',
                 name: 'address[full_name]',
@@ -94,7 +94,7 @@ export function CustomerAddressForm({
               sortOrder: 10
             },
             {
-              component: { default: Field },
+              component: { default: AddressFormField },
               props: {
                 type: 'text',
                 name: 'address[telephone]',
@@ -123,7 +123,7 @@ export function CustomerAddressForm({
               sortOrder: 30
             },
             {
-              component: { default: Field },
+              component: { default: AddressFormField },
               props: {
                 type: 'text',
                 name: 'address[address_1]',
@@ -147,7 +147,7 @@ export function CustomerAddressForm({
               sortOrder: 40
             },
             {
-              component: { default: Field },
+              component: { default: AddressFormField },
               props: {
                 type: 'text',
                 name: 'address[address_2]',
@@ -170,7 +170,7 @@ export function CustomerAddressForm({
               sortOrder: 50
             },
             {
-              component: { default: Field },
+              component: { default: AddressFormField },
               props: {
                 type: 'text',
                 name: 'address[postcode]',
@@ -218,7 +218,7 @@ CustomerAddressForm.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   customerAddressSchema: PropTypes.object.isRequired,
   onOpenSearch: PropTypes.func.isRequired,
-  searchedAddress: PropTypes.any.isRequired,
+  searchedAddress: PropTypes.any,
 };
 
 CustomerAddressForm.defaultProps = {

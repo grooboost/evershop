@@ -45,7 +45,7 @@ Index.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   customerAddressSchema: PropTypes.object.isRequired,
   onOpenSearch: PropTypes.func.isRequired,
-  searchedAddress: PropTypes.any.isRequired
+  searchedAddress: PropTypes.any
 };
 
 Index.defaultProps = {

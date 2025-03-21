@@ -15,7 +15,7 @@ import { TextArea } from '@components/common/form/fields/Textarea';
 import { Toggle } from '@components/common/form/fields/Toggle';
 import { useFormContext } from '@components/common/form/Form';
 import { FORM_FIELD_UPDATED } from '@evershop/evershop/src/lib/util/events';
-import './Field.scss';
+import './AddressFormField.scss';
 import { Password } from '@components/common/form/fields/Password';
 
 const useMemoizeArgs = (args, equalityFunc) => {
@@ -35,7 +35,7 @@ const useMemoizeArgs = (args, equalityFunc) => {
   return argsAreEqual ? prevArgs : args;
 };
 
-export function Field(props) {
+export function AddressFormField(props) {
   const { name, value, validationRules, onChange, type } = props;
   const context = useFormContext();
   const [fieldValue, setFieldValue] = React.useState(value || '');
@@ -120,7 +120,7 @@ export function Field(props) {
   );
 }
 
-Field.propTypes = {
+AddressFormField.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func,
@@ -136,7 +136,7 @@ Field.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
-Field.defaultProps = {
+AddressFormField.defaultProps = {
   onChange: undefined,
   validationRules: [],
   value: ''

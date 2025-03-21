@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Field } from '@evershop/otable/components/common/form/Field';
+import { AddressFormField } from '@evershop/otable/components/common/form/AddressFormField';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 
 export function BillingAddress({ useShippingAddress, setUseShippingAddress }) {
   return (
     <div>
-      <Field
+      <AddressFormField
         type="checkbox"
         formId="checkoutBillingAddressForm"
         name="useShippingAddress"
