@@ -14,21 +14,21 @@ const CompanyMobile = () => {
                 								</b>
               							</div>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", fontSize: "14px",}}>
-                								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", flexWrap: "wrap", alignContent: "flex-start", gap: "0px",}}>
-                  									<div style={{width: "102px", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>
-                    										<div style={{position: "relative", lineHeight: "23.4px", fontWeight: "600",}}>화-목요일</div>
+                								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start",}}>
+                  									<div style={{width: "102px", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", minWidth: "70px", maxWidth: "102px",}}>
+                    										<div style={{alignSelf: "stretch", position: "relative", lineHeight: "23.4px", fontWeight: "600",}}>화-목요일</div>
                   									</div>
                   									<div style={{position: "relative", lineHeight: "23.4px",}}>11:00 ~ 18:00 (점심시간 12:00 ~ 13:00)</div>
                 								</div>
-                								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", flexWrap: "wrap", alignContent: "flex-start", gap: "0px", marginTop: "-0.3px", position: "relative",}}>
-                  									<div style={{width: "102px", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>
-                    										<div style={{position: "relative", lineHeight: "23.4px", fontWeight: "600",}}>월·금요일</div>
+                								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", marginTop: "-0.3px", position: "relative",}}>
+                  									<div style={{width: "102px", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", minWidth: "70px", maxWidth: "102px",}}>
+                    										<div style={{alignSelf: "stretch", position: "relative", lineHeight: "23.4px", fontWeight: "600",}}>월·금요일</div>
                   									</div>
                   									<div style={{position: "relative", lineHeight: "23.4px",}}>09:00 ~ 18:00 (점심시간 12:00 ~ 13:00)</div>
                 								</div>
-                								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", flexWrap: "wrap", alignContent: "flex-start", gap: "0px", marginTop: "-0.3px", position: "relative",}}>
-                  									<div style={{width: "102px", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>
-                    										<div style={{position: "relative", lineHeight: "23.4px", fontWeight: "600",}}>토·일·공휴일</div>
+                								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", marginTop: "-0.3px", position: "relative",}}>
+                  									<div style={{width: "102px", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", minWidth: "70px", maxWidth: "102px",}}>
+                    										<div style={{alignSelf: "stretch", position: "relative", lineHeight: "23.4px", fontWeight: "600",}}>토·일·공휴일</div>
                   									</div>
                   									<div style={{position: "relative", lineHeight: "23.4px",}}>휴무</div>
                 								</div>

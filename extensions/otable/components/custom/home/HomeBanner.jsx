@@ -11,7 +11,7 @@ const HomeBanner = () => {
               <div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", fontSize: "34px", color: "#3a3a3a",}}>
                   <b style={{alignSelf: "stretch", position: "relative", letterSpacing: "-0.68px", lineHeight: "49px",}}>
                       <p style={{margin: "0",}}>오디너리테이블</p>
-                      <p style={{margin: "0",}}>일주일 집밥 식재료 박스</p>
+                      <p style={{margin: "0",}}>일주일 집밥 배송</p>
                   </b>
               </div>
               <div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "5px 0px 0px", textAlign: "center", fontSize: "18px",}}>
