@@ -11,7 +11,11 @@ import HomeSchedule from '@evershop/otable/components/custom/home/HomeSchedule';
 import HomeScheduleMobile from '@evershop/otable/components/custom/home/HomeScheduleMobile';
 import HomeCTA from '@evershop/otable/components/custom/home/HomeCTA';
 
-export default function Home({ continueShoppingUrl, cartUrl, emptifyMineCart, addMineCartItem }) {
+export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartItem }) {
+  const onOpenReviews = async () => {
+    window.location.href = `${homeUrl}store/vegebox`
+  }
+
   const onStartDelivery = async () => {
     try {
       await axios.post(emptifyMineCart);
@@ -37,7 +41,7 @@ export default function Home({ continueShoppingUrl, cartUrl, emptifyMineCart, ad
       }}
     >
       <HomeBanner onAction={onStartDelivery}/>
-      <HomeReviews onAction={onStartDelivery}/>
+      <HomeReviews onOpenReviews={onOpenReviews} onOpenStart={onStartDelivery}/>
       <HomeGallery title={`다음주 레시피`} subtitle={`식재료 남김 없이,\n건강한 집밥 플랜하세요!`} />
       <div className="hidden md:block"><HomeSchedule onAction={onStartDelivery}/></div>
       <div className="block md:hidden"><HomeScheduleMobile onAction={onStartDelivery}/></div>      
@@ -59,7 +63,7 @@ export const layout = {
 
 export const query = `
   query Query {
-    continueShoppingUrl: url(routeId: "homepage")
+    homeUrl: url(routeId: "homepage")
     cartUrl: url(routeId: "cart")
     emptifyMineCart: url(routeId: "emptifyMineCart")
     addMineCartItem: url(routeId: "addMineCartItem")

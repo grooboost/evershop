@@ -2,7 +2,7 @@ import React from 'react';
 import ChevronRight from '@evershop/otable/assets/icons/ChevronRight';
 import HomeReviewCardView from './HomeReviewCardView';
 
-const HomeReviews = ({ onAction }) => {
+const HomeReviews = ({ onOpenReviews, onOpenStart }) => {
   	return (
     		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "72px 0px", boxSizing: "border-box", gap: "12px", textAlign: "center", fontSize: "26px", color: "#3a3a3a", fontFamily: "Pretendard",}}>
       			<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
@@ -29,7 +29,7 @@ const HomeReviews = ({ onAction }) => {
       			</div>
                 <HomeReviewCardView />
       			<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "12px 0px 0px", gap: "12px", fontSize: "16px",}}>
-        				<div style={{width: "343px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.1)", border: "1px solid #3a3a3a", boxSizing: "border-box", height: "60px", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", maxWidth: "343px",}}>
+        				<div style={{width: "343px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.1)", border: "1px solid #3a3a3a", boxSizing: "border-box", height: "60px", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", maxWidth: "343px", cursor: "pointer",}} onClick={onOpenReviews}>
           					<div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: "10px",}}>
             						<div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
               							<div style={{position: "relative", lineHeight: "24px", fontWeight: "600",}}>후기 보러가기</div>
@@ -37,7 +37,7 @@ const HomeReviews = ({ onAction }) => {
             						<ChevronRight fill={'#3a3a3a'} />
           					</div>
         				</div>
-        				<div style={{width: "343px", boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.15)", borderRadius: "10px", backgroundColor: "#3a3a3a", height: "60px", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "10px", maxWidth: "343px", fontSize: "18px", color: "#fff", cursor: "pointer",}} onClick={onAction}>
+        				<div style={{width: "343px", boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.15)", borderRadius: "10px", backgroundColor: "#3a3a3a", height: "60px", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "10px", maxWidth: "343px", fontSize: "18px", color: "#fff", cursor: "pointer",}} onClick={onOpenStart}>
           					<div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
             						<b style={{position: "relative", lineHeight: "18px",}}>일주일 플랜 시작하기</b>
           					</div>

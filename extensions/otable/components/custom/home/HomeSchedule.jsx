@@ -15,7 +15,7 @@ const HomeSchedule = ({ onAction }) => {
           					<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", fontSize: "26px", color: "#3a3a3a",}}>
             						<b style={{position: "relative", lineHeight: "33.8px",}}>
               							<p style={{margin: "0",}}>다음주 준비를 위해</p>
-              							<p style={{margin: "0",}}>주말 아침까지</p>
+              							<p style={{margin: "0",}}>금요일 아침까지</p>
               							<p style={{margin: "0",}}>보내드려요</p>
             						</b>
           					</div>
@@ -34,7 +34,7 @@ const HomeSchedule = ({ onAction }) => {
               							</div>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", gap: "6px",}}>
                 								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>
-                  									<div style={{alignSelf: "stretch", position: "relative", lineHeight: "14px", fontWeight: "600",}}>매주 월요일</div>
+                  									<div style={{alignSelf: "stretch", position: "relative", lineHeight: "14px", fontWeight: "600",}}>매주 금요일</div>
                 								</div>
                 								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", fontSize: "18px", color: "#3a3a3a",}}>
                   									<b style={{alignSelf: "stretch", position: "relative", lineHeight: "27px",}}>일주일 집밥 예약 오픈</b>
@@ -51,7 +51,7 @@ const HomeSchedule = ({ onAction }) => {
               							</div>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", gap: "6px",}}>
                 								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>
-                  									<div style={{alignSelf: "stretch", position: "relative", lineHeight: "14px", fontWeight: "600",}}>매주 목요일까지</div>
+                  									<div style={{alignSelf: "stretch", position: "relative", lineHeight: "14px", fontWeight: "600",}}>차주 수요일까지</div>
                 								</div>
                 								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", fontSize: "18px", color: "#3a3a3a",}}>
                   									<b style={{alignSelf: "stretch", position: "relative", lineHeight: "27px",}}>예약 마감 및 확정</b>
@@ -68,11 +68,11 @@ const HomeSchedule = ({ onAction }) => {
               							</div>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", gap: "6px",}}>
                 								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>
-                  									<div style={{alignSelf: "stretch", position: "relative", lineHeight: "14px", fontWeight: "600",}}>매주 주말 아침</div>
+                  									<div style={{alignSelf: "stretch", position: "relative", lineHeight: "14px", fontWeight: "600",}}>금요일 아침</div>
                 								</div>
                 								<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", fontSize: "18px", color: "#3a3a3a",}}>
                   									<b style={{alignSelf: "stretch", position: "relative", lineHeight: "27px",}}>
-                    										<p style={{margin: "0",}}>지정한 요일에</p>
+                    										<p style={{margin: "0",}}>새벽 배송으로</p>
                     										<p style={{margin: "0",}}>집 앞 도착</p>
                   									</b>
                 								</div>
