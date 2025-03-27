@@ -4,7 +4,7 @@ import ScheduleStep1 from '@evershop/otable/assets/icons/ScheduleStep1';
 import ScheduleStep2 from '@evershop/otable/assets/icons/ScheduleStep2';
 import ScheduleStep3 from '@evershop/otable/assets/icons/ScheduleStep3';
 
-const HomeSchedulMobile = () => {
+const HomeSchedulMobile = ({ onAction }) => {
   	return (
     		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "72px 24px", boxSizing: "border-box", maxWidth: "992px", textAlign: "left", fontSize: "14px", color: "#ff6741", fontFamily: "Pretendard",}}>
       			<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", gap: "24px",}}>
@@ -68,7 +68,7 @@ const HomeSchedulMobile = () => {
             						</div>
           					</div>
           					<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "52px 0px 0px", textAlign: "center", fontSize: "18px", color: "#fff",}}>
-            						<div style={{width: "342px", boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.15)", borderRadius: "10px", backgroundColor: "#3a3a3a", height: "74px", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "10px", maxWidth: "343px",}}>
+            						<div style={{width: "342px", boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.15)", borderRadius: "10px", backgroundColor: "#3a3a3a", height: "74px", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "10px", maxWidth: "343px", cursor: "pointer",}} onClick={onAction}>
               							<div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
                 								<b style={{position: "relative", lineHeight: "18px",}}>오디너리테이블과 함께하는 일주일</b>
               							</div>
