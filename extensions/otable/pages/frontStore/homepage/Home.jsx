@@ -11,9 +11,9 @@ import HomeSchedule from '@evershop/otable/components/custom/home/HomeSchedule';
 import HomeScheduleMobile from '@evershop/otable/components/custom/home/HomeScheduleMobile';
 import HomeCTA from '@evershop/otable/components/custom/home/HomeCTA';
 
-export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartItem }) {
+export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartItem, reviews }) {
   const onOpenReviews = async () => {
-    window.location.href = `${homeUrl}store/vegebox`
+    window.location.href = `${homeUrl}store/vegebox?mod=reviews`
   }
 
   const onStartDelivery = async () => {
@@ -41,7 +41,7 @@ export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartIte
       }}
     >
       <HomeBanner onAction={onStartDelivery}/>
-      <HomeReviews onOpenReviews={onOpenReviews} onOpenStart={onStartDelivery}/>
+      <HomeReviews reviews={reviews} onOpenReviews={onOpenReviews} onOpenStart={onStartDelivery}/>
       <HomeGallery title={`다음주 레시피`} subtitle={`식재료 남김 없이,\n건강한 집밥 플랜하세요!`} />
       <div className="hidden md:block"><HomeSchedule onAction={onStartDelivery}/></div>
       <div className="block md:hidden"><HomeScheduleMobile onAction={onStartDelivery}/></div>      
@@ -53,7 +53,10 @@ export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartIte
 
 
 Home.propTypes = {
-  continueShoppingUrl: PropTypes.string.isRequired
+  homeUrl: PropTypes.string.isRequired,
+  cartUrl: PropTypes.string.isRequired,
+  emptifyMineCart: PropTypes.string.isRequired,
+  addMineCartItem: PropTypes.string.isRequired,
 };
 
 export const layout = {
@@ -67,5 +70,23 @@ export const query = `
     cartUrl: url(routeId: "cart")
     emptifyMineCart: url(routeId: "emptifyMineCart")
     addMineCartItem: url(routeId: "addMineCartItem")
+    reviews {
+      items {
+        createdAt
+        reviewId
+        rating
+        customerName
+        comment
+        product {
+          name
+        }
+      }
+      total
+      currentFilters {
+        key
+        operation
+        value
+      }
+    }
   }
 `;
