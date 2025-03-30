@@ -1,0 +1,29 @@
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-card {
+  border: 0px solid #ccc;
+  background-color: #f5f5f7;
+  padding: 0px;
+  border-radius: 3px;
+}
+
+.review-card-inner {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 8px;
+}
+
+// 미디어 쿼리를 통한 모바일 대응
+@media (max-width: 600px) {
+  .reviews-container {
+    padding: 0;
+  }
+
+  .review-card {
+    padding: 0px;
+  }
+}

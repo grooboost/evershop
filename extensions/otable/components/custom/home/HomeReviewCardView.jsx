@@ -1,19 +1,6 @@
 import React from 'react';
 import HomeReviewCard from './HomeReviewCard';
-
-  // 날짜 포맷 변경 함수
-  const formatDate = (epoch) => {
-    const date = new Date(parseInt(epoch, 10));
-    return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
-  };
-
-  // 이름 마스킹 함수
-  const maskName = (name) => {
-    if (name.length > 1) {
-      return name[0] + '*'.repeat(name.length - 2) + name[name.length - 1];
-    }
-    return name;  // 이름이 한 글자일 경우 마스킹하지 않음
-  };
+import { maskName, formatDate } from '@evershop/otable/utils/format';
 
 const HomeReviewCardView = ({ reviews }) => {
   return (<div style={{ width: '100%', overflowX: 'auto', padding: '12px 12px', scrollbarWidth: 'none'}}>

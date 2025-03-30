@@ -1,130 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import './Reviews.scss';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
-import Area from '@components/common/Area';
-import BasicRow from '@components/common/grid/rows/BasicRow';
-import SortableHeader from '@components/common/grid/headers/Sortable';
-import DummyColumnHeader from '@components/common/grid/headers/Dummy';
-import RatingRow from './row/RatingRow';
-import CommentRow from './row/CommentRow';
-import ProductRow from './row/ProductRow';
-import DateRow from './row/DateRow';
+import Review from './Review';
 
-
-export default function Reviews({ reviews }) {
+export default function Reviews({ homeUrl, reviews }) {
+  const onOpenReview = async (sku) => {
+    window.location.href = `${homeUrl}store/vegebox/${sku}`
+  }
   return (
-    <div style={{padding: '0px 0px 40px 0px'}}>
-      <table className="listing sticky">
-        <thead>
-          <tr>
-            <Area
-              className=""
-              id="reviewGridHeader"
-              noOuter
-              coreComponents={[
-                {
-                  component: {
-                    default: () => (
-                      <SortableHeader
-                        title="Date"
-                        name="createdAt"
-                        currentFilters={reviews.currentFilters}
-                      />
-                    )
-                  },
-                  sortOrder: 1
-                },
-                {
-                  component: {
-                    default: () => (
-                      <SortableHeader
-                        title="Product"
-                        name="product"
-                        currentFilters={reviews.currentFilters}
-                      />
-                    )
-                  },
-                  sortOrder: 2
-                },
-                {
-                  component: {
-                    default: () => <DummyColumnHeader title="Customer Name" />
-                  },
-                  sortOrder: 5
-                },
-                {
-                  component: {
-                    default: () => <DummyColumnHeader title="Comment" />
-                  },
-                  sortOrder: 10
-                },
-                {
-                  component: {
-                    default: () => (
-                      <SortableHeader
-                        title="Rating"
-                        name="rating"
-                        currentFilters={reviews.currentFilters}
-                      />
-                    )
-                  },
-                  sortOrder: 15
-                }
-              ]}
-            />
-          </tr>
-        </thead>
-        <tbody>
-          {reviews.items.map((r, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <tr key={i}>
-              <Area
-                className=""
-                id="reviewGridRow"
-                row={r}
-                noOuter
-                coreComponents={[
-                  {
-                    component: {
-                      default: () => <DateRow date={new Date(parseInt(r.createdAt, 10))} />
-                    },
-                    sortOrder: 1
-                  },
-                  {
-                    component: {
-                      default: () => <ProductRow product={r.product} />
-                    },
-                    sortOrder: 5
-                  },
-                  {
-                    component: {
-                      default: ({ areaProps }) => (
-                        <BasicRow areaProps={areaProps} id="customerName" />
-                      )
-                    },
-                    sortOrder: 5
-                  },
-                  {
-                    component: {
-                      default: () => <CommentRow comment={r.comment} />
-                    },
-                    sortOrder: 10
-                  },
-                  {
-                    component: {
-                      default: () => <RatingRow rating={r.rating} />
-                    },
-                    sortOrder: 15
-                  }
-                ]}
-              />
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" style={{ padding: '0px 0px 40px 0px' }}>
+      {reviews.items.map((r, i) => (
+        <div key={i} style={{cursor: "pointer",}} onClick={() => onOpenReview(r.product.sku)}>
+          <Review review={r} />
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
 Reviews.propTypes = {
@@ -146,7 +38,10 @@ Reviews.propTypes = {
         customerName: PropTypes.string,
         comment: PropTypes.string,
         product: PropTypes.shape({
-          name: PropTypes.string
+          productId: PropTypes.number,
+          uuid: PropTypes.string,
+          name: PropTypes.string,
+          sku: PropTypes.string
         })
       })
     )
@@ -168,6 +63,7 @@ export const layout = {
 
 export const query = `
   query Query($filters: [FilterInput]) {
+    homeUrl: url(routeId: "homepage")
     reviews (filters: $filters) {
       items {
         createdAt
@@ -176,7 +72,10 @@ export const query = `
         customerName
         comment
         product {
+          productId
+          uuid
           name
+          sku
         }
       }
       total
