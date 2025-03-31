@@ -8,9 +8,9 @@ module.exports = exports = async (connection) => {
   "review_image_id" INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
   "review_image_review_id" INT NOT NULL,
   "origin_image" varchar NOT NULL,
-  "thumb_image" varchar NOT NULL,
-  "listing_image" varchar NOT NULL,
-  "single_image" varchar NOT NULL,
+  "thumb_image" varchar,
+  "listing_image" varchar,
+  "single_image" varchar,
   "is_main" boolean DEFAULT false,
   CONSTRAINT "FK_PRODUCT_REVIEW_IMAGE_LINK" FOREIGN KEY ("review_image_review_id") REFERENCES "product_review" ("review_id") ON DELETE CASCADE
 )`
