@@ -4,8 +4,8 @@ import HomeReviewCardView from './HomeReviewCardView';
 import _ from 'lodash';
 
 const HomeReviews = ({ reviews, onOpenReviews, onOpenStart }) => {
-	const count = reviews.total;
-	const ratings = reviews.items.map(i => i.rating);
+	const count = reviews.length;
+	const ratings = reviews.map(i => i.rating);
 	const average = _.round(_.mean(ratings), 1);
 
 	return (
@@ -32,7 +32,7 @@ const HomeReviews = ({ reviews, onOpenReviews, onOpenStart }) => {
 								</b>
 						</div>
 				</div>
-				<HomeReviewCardView reviews={reviews.items.slice(0, 4)} />
+				<HomeReviewCardView reviews={reviews.slice(0, 4)} />
 				<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "12px 0px 0px", gap: "12px", fontSize: "16px",}}>
 						<div style={{width: "343px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.1)", border: "1px solid #3a3a3a", boxSizing: "border-box", height: "60px", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", maxWidth: "343px", cursor: "pointer",}} onClick={onOpenReviews}>
 								<div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: "10px",}}>

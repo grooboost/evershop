@@ -11,7 +11,9 @@ import HomeSchedule from '@evershop/otable/components/custom/home/HomeSchedule';
 import HomeScheduleMobile from '@evershop/otable/components/custom/home/HomeScheduleMobile';
 import HomeCTA from '@evershop/otable/components/custom/home/HomeCTA';
 
-export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartItem, reviews }) {
+export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartItem, category }) {
+  const reviews = category.products.items.flatMap(i => i.reviews);
+
   const onOpenReviews = async () => {
     window.location.href = `${homeUrl}store/vegebox?mod=reviews`
   }
@@ -56,7 +58,16 @@ Home.propTypes = {
   homeUrl: PropTypes.string.isRequired,
   cartUrl: PropTypes.string.isRequired,
   emptifyMineCart: PropTypes.string.isRequired,
-  addMineCartItem: PropTypes.string.isRequired,
+  addMineCartItem: PropTypes.string.isRequired
+};
+
+Home.defaultProps = {
+  category: {
+    categoryId: 0,
+    products: {
+      items: []
+    }
+  }
 };
 
 export const layout = {
@@ -70,22 +81,24 @@ export const query = `
     cartUrl: url(routeId: "cart")
     emptifyMineCart: url(routeId: "emptifyMineCart")
     addMineCartItem: url(routeId: "addMineCartItem")
-    reviews {
-      items {
-        createdAt
-        reviewId
-        rating
-        customerName
-        comment
-        product {
-          name
+    category: category(id: 9) {
+      categoryId
+      products (filters: []) {
+        items {
+          reviews {
+            createdAt
+            reviewId
+            rating
+            customerName
+            comment
+            product {
+              productId
+              uuid
+              name
+              sku
+            }
+          }
         }
-      }
-      total
-      currentFilters {
-        key
-        operation
-        value
       }
     }
   }
