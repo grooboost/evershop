@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Reviews.scss';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
-import Rating from '@evershop/product_review/components/Rating';
+import Rating from '@evershop/otable/components/Rating';
 
 export default function Reviews({ product: { reviews = [] } }) {
   return (

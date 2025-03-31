@@ -37,7 +37,7 @@ export default function ReviewForm({ action, product }) {
             id="comment-form"
             action={action}
             method="POST"
-            onSuccess={onSuccess}
+                        onSuccess={onSuccess}
             isJSON
             btnText={_("Submit review")}
           >
@@ -45,6 +45,7 @@ export default function ReviewForm({ action, product }) {
             <div className="rating__stars">
               {[...Array(5)].map((e, i) => (
                 <a
+                  key={i}
                   className=""
                   href="#"
                   onClick={(element) => {
