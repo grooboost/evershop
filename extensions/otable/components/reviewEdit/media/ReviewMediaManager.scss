@@ -1,0 +1,76 @@
+.review-image-manager img {
+  max-width: 100%;
+}
+.review-image-manager .image-list {
+  grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-rows: 1fr;
+}
+.review-image-manager .image-list .image {
+  position: relative;
+  padding: 5px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e1e1e1;
+  background: #fff;
+  max-width: 150px;
+}
+.review-image-manager .image-list .uploader {
+  position: relative;
+  padding: 5px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #e1e1e1;
+  background: #fff;
+  max-width: 150px;
+}
+.review-image-manager .image-list .grid-item:first-child {
+  grid-column: 1 / span 2;
+  max-width: 100%;
+}
+.review-image-manager .image-list .grid-item:first-child:after {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+.review-image-manager .image-list .image:first-child {
+  grid-row: 1 / span 2;
+}
+.review-image-manager .image-list .image:first-child img {
+  max-width: 100%;
+}
+.review-image-manager .image-list {
+  outline: 0;
+}
+.review-image-manager .image-list .image .img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.review-image-manager .image-list .image .remove,
+.review-image-manager .image-list .image .zoom {
+  position: absolute;
+  top: 10px;
+}
+.review-image-manager .image-list .image .remove {
+  left: 10px;
+}
+.review-image-manager .image-list .image .zoom {
+  right: 10px;
+}
+.uploader .invisible {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.uploader .uploader-icon label {
+  cursor: pointer;
+  font-size: 20px;
+  color: #058c8c;
+}
