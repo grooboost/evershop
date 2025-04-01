@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ProductNoThumbnail from '@components/common/ProductNoThumbnail';
 
-export default function Order({ order }) {
+export default function Order({ order, onOpenProduct }) {
   return (
     <div className="order border-divider">
       <div className="order-inner grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="order-items col-span-2">
           {order.items.map((item, index) => (
-            <div key={index} className="order-item mb-4 flex gap-8 items-center">
+            <div key={index} className="order-item mb-4 flex gap-8 items-center" style={{cursor: "pointer",}} onClick={() => onOpenProduct(item)}>
               <div className="thumbnail border border-divider p-4 rounded">
                 {item.thumbnail && (
                   <img

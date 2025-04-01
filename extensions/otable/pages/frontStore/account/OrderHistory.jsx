@@ -4,7 +4,11 @@ import Order from '@evershop/otable/components/frontStore/customer/detail/Order'
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 
 export default function OrderHistory({ customer: { orders = [] } }) {
-  const latestFirst = orders.sort((a, b) => b.orderNumber - a.orderNumber)
+  const onOpenProduct = async (product) => {
+    window.location.href = product.productViewUrl;
+  }
+
+  const latestFirst = orders.sort((a, b) => b.orderNumber - a.orderNumber);
   return (
     <div className="order-history divide-y">
       {orders.length === 0 && (
@@ -14,7 +18,7 @@ export default function OrderHistory({ customer: { orders = [] } }) {
       )}
       {latestFirst.map((order) => (
         <div key={order.orderId} className="order-history-order border-divider py-8">
-          <Order order={order} />
+          <Order order={order} onOpenProduct={onOpenProduct}/>
         </div>
       ))}
     </div>
@@ -47,6 +51,7 @@ OrderHistory.propTypes = {
         items: PropTypes.arrayOf(
           PropTypes.shape({
             productName: PropTypes.string.isRequired,
+            productViewUrl: PropTypes.string.isRequired,
             thumbnail: PropTypes.string,
             productPrice: PropTypes.shape({
               value: PropTypes.number.isRequired,
@@ -91,6 +96,7 @@ export const query = `
         }
         items {
           productName
+          productViewUrl
           thumbnail
           productPrice {
             value
