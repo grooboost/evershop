@@ -30,7 +30,7 @@ export default function ReviewForm({ action, product }) {
         </div>
       )}
       {!isSubmitted && (
-        <>
+        <div className='flex flex-col gap-8'>
           <h3>{_('Your comment')}</h3>
           {error && <div className="error text-critical">{error}</div>}
           <Form
@@ -81,7 +81,7 @@ export default function ReviewForm({ action, product }) {
             />
             <Field type="hidden" name="product_id" value={product.productId} />
           </Form>
-        </>
+        </div>
       )}
     </div>
   );
@@ -95,13 +95,13 @@ ReviewForm.propTypes = {
 };
 
 export const layout = {
-  areaId: 'productPageMiddleBottom',
+  areaId: 'productPageBottom',
   sortOrder: 50
 };
 
 export const query = `
   query {
-    action: url(routeId: "addReview"),
+    action: url(routeId: "addReviewWithImage"),
     product: product(id: getContextValue("productId")) {
       productId
     }

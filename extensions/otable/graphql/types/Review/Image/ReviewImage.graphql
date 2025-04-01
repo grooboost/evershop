@@ -1,0 +1,18 @@
+"""
+The `Image` type represents a Review image.
+"""
+type Image {
+  id: ID!
+  uuid: String!
+  alt: String
+  url: String
+  listing: String
+  single: String
+  thumb: String
+  origin: String
+}
+
+extend type Review {
+  image: Image
+  gallery: [Image]
+}

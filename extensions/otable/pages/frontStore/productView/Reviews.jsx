@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Reviews.scss';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 import Rating from '@evershop/otable/components/Rating';
+import { maskName, formatDate } from '@evershop/otable/utils/format';
 
 export default function Reviews({ product: { reviews = [] } }) {
   return (
@@ -15,17 +16,21 @@ export default function Reviews({ product: { reviews = [] } }) {
           </li>
         )}
         {reviews.map((review) => (
-          <li key={review.uuid} className="flex flex-col gap-1">
-            <div className="rating">
-              <Rating rating={review.rating} />
+          <li key={review.uuid} className="flex flex-col gap-4" style={{ color: '#3a3a3a' }}>
+            <div className='flex gap-4'>
+              <div className="rating">
+                <Rating rating={review.rating} />
+              </div>
+              <div style={{ fontWeight: '400' }}>{maskName(review.customerName)}</div>
+              <div style={{ fontWeight: '200', color: '#6b7280', fontSize: 12 }}>{formatDate(review.createdAt)}</div>
             </div>
-            <p className="comment">{review.comment}</p>
-            <div>
-              <span>
-                {_('Review by ${customer_name}', {
-                  customer_name: review.customerName
-                })}
-              </span>
+            <div className='flex gap-8'>
+              {review.image?.origin && <div>
+                <img src={review.image.origin} style={{ minWidth: "120px", maxHeight: "100px" }} />
+              </div>}
+              <div className="flex flex-col gap-1" >
+                {review.comment}
+              </div>
             </div>
           </li>
         ))}
@@ -41,14 +46,18 @@ Reviews.propTypes = {
         rating: PropTypes.number.isRequired,
         comment: PropTypes.string.isRequired,
         customerName: PropTypes.string.isRequired,
-        createdAt: PropTypes.string.isRequired
+        createdAt: PropTypes.string.isRequired,
+        image: PropTypes.shape({
+          alt: PropTypes.string,
+          origin: PropTypes.string
+        })
       })
     )
   }).isRequired
 };
 
 export const layout = {
-  areaId: 'productPageMiddleBottom',
+  areaId: 'productPageBottom',
   sortOrder: 45
 };
 
@@ -62,6 +71,10 @@ export const query = `
         customerName
         comment
         createdAt
+        image {
+          alt
+          origin
+        }
       }
     }
   }

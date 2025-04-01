@@ -97,6 +97,10 @@ export const query = `
               name
               sku
             }
+            image {
+              alt
+              origin
+            }
           }
         }
       }
