@@ -8,6 +8,10 @@ export default function OrderHistory({ customer: { orders = [] } }) {
     window.location.href = product.productViewUrl;
   }
 
+  const onWriteReview = async (product) => {
+    window.location.href = `${product.productViewUrl}/reviews/new`;
+  }
+
   const latestFirst = orders.sort((a, b) => b.orderNumber - a.orderNumber);
   return (
     <div className="order-history divide-y">
@@ -18,7 +22,7 @@ export default function OrderHistory({ customer: { orders = [] } }) {
       )}
       {latestFirst.map((order) => (
         <div key={order.orderId} className="order-history-order border-divider py-8">
-          <Order order={order} onOpenProduct={onOpenProduct}/>
+          <Order order={order} onOpenProduct={onOpenProduct} onWriteReview={onWriteReview}/>
         </div>
       ))}
     </div>

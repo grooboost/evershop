@@ -2,8 +2,9 @@ import { _ } from '@evershop/evershop/src/lib/locale/translate';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ProductNoThumbnail from '@components/common/ProductNoThumbnail';
+import Button from '@components/common/form/Button';
 
-export default function Order({ order, onOpenProduct }) {
+export default function Order({ order, onOpenProduct, onWriteReview }) {
   return (
     <div className="order border-divider">
       <div className="order-inner grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -35,19 +36,22 @@ export default function Order({ order, onOpenProduct }) {
               </div>
             </div>
           ))}
-        </div>
-        <div className="order-total col-span-1">
-          <div className="order-header">
-            <div className="order-number">
-              <span className="font-bold">
-                {_('Order')}: #{order.orderNumber}
-              </span>
-              <span className="italic pl-4">{order.createdAt.text}</span>
+          <div className="order-total">
+            <div className="order-header">
+              <div className="order-number">
+                <span className="font-bold">
+                  {_('Order')}: #{order.orderNumber}
+                </span>
+                <span className="italic pl-4">{order.createdAt.text}</span>
+              </div>
+            </div>
+            <div className="order-total-value font-bold">
+              {_('Total')}:{order.grandTotal.text}
             </div>
           </div>
-          <div className="order-total-value font-bold">
-            {_('Total')}:{order.grandTotal.text}
-          </div>
+        </div>
+        <div className="flex flex-col col-span-1" >
+          <Button title={`리뷰 쓰기`} onAction={() => onWriteReview(order.items[0])} />
         </div>
       </div>
     </div>
