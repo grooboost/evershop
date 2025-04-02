@@ -11,7 +11,7 @@ export default function BasicMenu({
   };
 
   const listingClasses = isMain
-    ? 'md:flex md:justify-center md:space-x-10 absolute md:relative left-[-2.5rem] md:left-0 top-full md:top-auto mt-2 md:mt-0 w-screen md:w-auto md:bg-transparent p-4 md:p-0 min-w-[250px] bg-white z-30 divide-y md:divide-y-0'
+    ? 'md:flex md:justify-start md:space-x-10 absolute md:relative left-[-2.5rem] md:left-0 top-full md:top-auto mt-2 md:mt-0 w-screen md:w-auto md:bg-transparent p-4 md:p-0 min-w-[250px] bg-white z-30 divide-y md:divide-y-0'
     : 'flex justify-center space-x-10 relative left-[-2.5rem] md:left-0 top-full md:top-auto mt-2 md:mt-0 w-screen md:w-auto md:bg-transparent p-4 md:p-0 min-w-[250px] bg-white z-30';
   return (
     <div className={className}>
