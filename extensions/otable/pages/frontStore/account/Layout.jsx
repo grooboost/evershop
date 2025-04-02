@@ -19,7 +19,6 @@ export default function Layout({ logoutUrl }) {
   };
   return (
     <div>
-      <h1 className="text-center">{_('My Account')}</h1>
       <div className="page-width mt-12">
         <div className="col-span-1">
           <div className="border-b mb-8 flex justify-between items-center  border-textSubdued">
