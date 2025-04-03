@@ -22,7 +22,7 @@ export default function Home({ version, varsFromAdmin, homeUrl, cartUrl, emptify
       const response = await axios.post(
         addMineCartItem,
         {
-          sku: 'wmeal-250301',
+          sku: varsFromAdmin.wmealSku,
           qty: 1
         }
       );

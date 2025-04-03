@@ -2,6 +2,7 @@ const { setContextValue } = require("@evershop/evershop/src/modules/graphql/serv
 
 module.exports = (request) => {
   const varsFromAdmin = {
+    wmealSku: 'wmeal-250301',
     bestReviews: [24, 26, 29, 31],
     reviewStats: {count: 20, avgRating: 4.7},
     nextWeekRecipeImgs: [
