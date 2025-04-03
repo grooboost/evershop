@@ -1,0 +1,28 @@
+"""
+Lookup CMS variable by ID
+"""
+type CmsVariable {
+  cmsVariableId: Int
+  uuid: String!
+  status: Int!
+  name: String!
+  data: JSON!
+  editUrl: String!
+  updateApi: String!
+  deleteApi: String!
+}
+
+"""
+Return a collection of CMS variables
+"""
+type CmsVariableCollection {
+  items: [CmsVariable]
+  currentVariable: Int!
+  total: Int!
+  currentFilters: [Filter]
+}
+
+extend type Query {
+  cmsVariable(id: Int): CmsVariable
+  cmsVariables(filters: [FilterInput]): CmsVariableCollection
+}
