@@ -23,6 +23,7 @@ type CmsVariableCollection {
 }
 
 extend type Query {
+  cmsVariableByName(name: String): CmsVariable
   cmsVariable(id: Int): CmsVariable
   cmsVariables(filters: [FilterInput]): CmsVariableCollection
 }

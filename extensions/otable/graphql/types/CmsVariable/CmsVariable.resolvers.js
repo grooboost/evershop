@@ -8,6 +8,12 @@ const { CMSVariableCollection } = require('@evershop/otable/services/cms/CMSVari
 
 module.exports = {
   Query: {
+    cmsVariableByName: async (root, { name }, { pool }) => {
+      const query = getCmsVariablesBaseQuery();
+      query.where('name', '=', name);
+      const variable = await query.load(pool);
+      return variable ? camelCase(variable) : null;
+    },
     cmsVariable: async (root, { id }, { pool }) => {
       const query = getCmsVariablesBaseQuery();
       query.where('cms_variable_id', '=', id);

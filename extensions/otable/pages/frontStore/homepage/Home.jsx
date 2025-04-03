@@ -10,8 +10,14 @@ import HomeSchedule from '@evershop/otable/components/custom/home/HomeSchedule';
 import HomeScheduleMobile from '@evershop/otable/components/custom/home/HomeScheduleMobile';
 import HomeCTA from '@evershop/otable/components/custom/home/HomeCTA';
 
-export default function Home({ version, varsFromAdmin, homeUrl, cartUrl, emptifyMineCart, addMineCartItem, reviews }) {
+export default function Home({ version, variable, homeUrl, cartUrl, emptifyMineCart, addMineCartItem, reviews }) {
   console.log('version', version);
+  const {
+    wmealSku,
+    reviewStats,
+    nextWeekRecipeImgs,
+    nextWeekIngredientImgs,
+  } = variable.data;
   const onOpenReviews = async () => {
     window.location.href = `${homeUrl}store/vegebox?mod=reviews`
   }
@@ -22,7 +28,7 @@ export default function Home({ version, varsFromAdmin, homeUrl, cartUrl, emptify
       const response = await axios.post(
         addMineCartItem,
         {
-          sku: varsFromAdmin.wmealSku,
+          sku: wmealSku,
           qty: 1
         }
       );
@@ -32,11 +38,8 @@ export default function Home({ version, varsFromAdmin, homeUrl, cartUrl, emptify
     }
   }
   
-  const reviewCount = varsFromAdmin.reviewStats.count;
-  const reviewAvgRating = varsFromAdmin.reviewStats.avgRating;
-
-  const nextWeekRecipeImgs = varsFromAdmin.nextWeekRecipeImgs;
-  const nextWeekIngredientImgs = varsFromAdmin.nextWeekIngredientImgs;
+  const reviewCount = reviewStats.count;
+  const reviewAvgRating = reviewStats.avgRating;
   const nextWeekRecipes = nextWeekRecipeImgs.map(i => ({ img_small: i }));
   const nextWeekIngredients = nextWeekIngredientImgs.map(i => ({ img_small: i }));
 
@@ -76,9 +79,11 @@ export const layout = {
 };
 
 export const query = `
-  query Query ($version: String, $varsFromAdmin: JSON, $filters: [FilterInput!]) {
+  query Query ($version: String, $filters: [FilterInput!]) {
     version: const(value: $version)
-    varsFromAdmin: dict(value: $varsFromAdmin)
+    variable: cmsVariableByName(name: "home") {
+      data
+    }
     homeUrl: url(routeId: "homepage")
     cartUrl: url(routeId: "cart")
     emptifyMineCart: url(routeId: "emptifyMineCart")
@@ -109,6 +114,5 @@ export const query = `
 export const variables = `
 {
   filters: getContextValue('filtersFromVars'),
-  varsFromAdmin: getContextValue('varsFromAdmin'),
   version: '1.0.1',
 }`;
