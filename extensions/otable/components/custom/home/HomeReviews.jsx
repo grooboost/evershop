@@ -3,11 +3,7 @@ import ChevronRight from '@evershop/otable/assets/icons/ChevronRight';
 import HomeReviewCardView from './HomeReviewCardView';
 import _ from 'lodash';
 
-const HomeReviews = ({ reviews, onOpenReviews, onOpenStart }) => {
-	const count = reviews.length;
-	const ratings = reviews.map(i => i.rating);
-	const average = _.round(_.mean(ratings), 1);
-
+const HomeReviews = ({ count, rating, reviews, onOpenReviews, onOpenStart }) => {
 	return (
 		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "72px 0px", boxSizing: "border-box", gap: "12px", textAlign: "center", fontSize: "26px", color: "#3a3a3a", fontFamily: "Pretendard",}}>
 				<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
@@ -28,7 +24,7 @@ const HomeReviews = ({ reviews, onOpenReviews, onOpenStart }) => {
 						<div style={{display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>
 								<b style={{position: "relative", lineHeight: "27px",}}>
 										<span>{`평균 만족도 `}</span>
-										<span style={{color: "#ff6741",}}>{average}</span>
+										<span style={{color: "#ff6741",}}>{rating}</span>
 								</b>
 						</div>
 				</div>

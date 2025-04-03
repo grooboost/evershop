@@ -1,0 +1,4 @@
+extend type Query {
+  const(value: String): String
+  dict(value: JSON): JSON
+}

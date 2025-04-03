@@ -16,6 +16,7 @@ import IsApprovedRow from './row/IsApprovedRow';
 import RatingRow from './row/RatingRow';
 import CommentRow from './row/CommentRow';
 import ProductRow from './row/ProductRow';
+import { formatDate } from '@evershop/otable/utils/format';
 
 function Actions({ reviews = [], selectedIds = [] }) {
   const { openAlert, closeAlert } = useAlertContext();
@@ -258,6 +259,12 @@ export default function ReviewGrid({
               coreComponents={[
                 {
                   component: {
+                    default: () => <DummyColumnHeader title="ID" />
+                  },
+                  sortOrder: 0
+                },
+                {
+                  component: {
                     default: () => (
                       <SortableHeader
                         title="Product"
@@ -303,6 +310,12 @@ export default function ReviewGrid({
                     )
                   },
                   sortOrder: 20
+                },
+                {
+                  component: {
+                    default: () => <DummyColumnHeader title="Date" />
+                  },
+                  sortOrder: 30
                 }
               ]}
             />
@@ -339,6 +352,12 @@ export default function ReviewGrid({
                 coreComponents={[
                   {
                     component: {
+                      default: () => <td>{r.reviewId}</td>
+                    },
+                    sortOrder: 0
+                  },
+                  {
+                    component: {
                       default: () => <ProductRow product={r.product} />
                     },
                     sortOrder: 5
@@ -366,6 +385,12 @@ export default function ReviewGrid({
                       default: () => <IsApprovedRow approved={r.approved} />
                     },
                     sortOrder: 20
+                  },
+                  {
+                    component: {
+                      default: () => <td>{formatDate(r.createdAt)}</td>
+                    },
+                    sortOrder: 30
                   }
                 ]}
               />
@@ -387,7 +412,9 @@ ReviewGrid.propTypes = {
   reviews: PropTypes.shape({
     items: PropTypes.arrayOf(
       PropTypes.shape({
+        reviewId: PropTypes.number.isRequired,
         uuid: PropTypes.string.isRequired,
+        createdAt: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         approved: PropTypes.bool.isRequired,
         comment: PropTypes.string.isRequired,
@@ -418,6 +445,7 @@ export const query = `
       items {
         reviewId
         uuid
+        createdAt
         rating
         customerName
         approved

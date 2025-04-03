@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeGalleryCard from './HomeGalleryCard';
 
-const HomeGallery = ({title, subtitle}) => {
+const HomeGallery = ({title, subtitle, items}) => {
   return (
       <div style={{width: "100%", position: "relative", backgroundColor: "#f5f5f7", overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "56px 10px 96px", boxSizing: "border-box", gap: "32px", textAlign: "center", fontSize: "18px", color: "#cd8f50", fontFamily: "Pretendard",}}>
           <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", gap: "12px",}}>
@@ -20,27 +20,10 @@ const HomeGallery = ({title, subtitle}) => {
                     <div style={{ textAlign: 'center' }}>
                         <div style={{ display: 'inline-flex', gap: '10px', flexWrap: 'nowrap', flexDirection: 'column' }}>
                             <div style={{alignSelf: "stretch", overflow: "hidden", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "center", gap: "10px",}}>
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
+                                {items.filter((_, i) => i % 2 == 0).map((item, index) => <HomeGalleryCard key={index} item={item}/>)}
                             </div>
                             <div style={{alignSelf: "stretch", overflow: "hidden", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "center", gap: "10px",}}>
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
-                                <HomeGalleryCard />
+                                {items.filter((_, i) => i % 2 == 1).map((item, index) => <HomeGalleryCard key={index} item={item}/>)}
                             </div>
                         </div>
                     </div>

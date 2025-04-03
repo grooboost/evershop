@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
 import Area from '@components/common/Area';
-import Button from '@components/common/form/Button';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 import HomeBanner from '@evershop/otable/components/custom/home/HomeBanner';
 import HomeReviews from '@evershop/otable/components/custom/home/HomeReviews';
@@ -11,9 +10,8 @@ import HomeSchedule from '@evershop/otable/components/custom/home/HomeSchedule';
 import HomeScheduleMobile from '@evershop/otable/components/custom/home/HomeScheduleMobile';
 import HomeCTA from '@evershop/otable/components/custom/home/HomeCTA';
 
-export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartItem, category }) {
-  const reviews = category.products.items.flatMap(i => i.reviews);
-
+export default function Home({ version, varsFromAdmin, homeUrl, cartUrl, emptifyMineCart, addMineCartItem, reviews }) {
+  console.log('version', version);
   const onOpenReviews = async () => {
     window.location.href = `${homeUrl}store/vegebox?mod=reviews`
   }
@@ -33,6 +31,14 @@ export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartIte
       console.log(error);
     }
   }
+  
+  const reviewCount = varsFromAdmin.reviewStats.count;
+  const reviewAvgRating = varsFromAdmin.reviewStats.avgRating;
+
+  const nextWeekRecipeImgs = varsFromAdmin.nextWeekRecipeImgs;
+  const nextWeekIngredientImgs = varsFromAdmin.nextWeekIngredientImgs;
+  const nextWeekRecipes = nextWeekRecipeImgs.map(i => ({ img_small: i }));
+  const nextWeekIngredients = nextWeekIngredientImgs.map(i => ({ img_small: i }));
 
   return (
     <div
@@ -43,11 +49,11 @@ export default function Home({ homeUrl, cartUrl, emptifyMineCart, addMineCartIte
       }}
     >
       <HomeBanner onAction={onStartDelivery}/>
-      <HomeReviews reviews={reviews} onOpenReviews={onOpenReviews} onOpenStart={onStartDelivery}/>
-      <HomeGallery title={`다음주 레시피`} subtitle={`식재료 남김 없이,\n건강한 집밥 플랜하세요!`} />
+      <HomeReviews count={reviewCount} rating={reviewAvgRating} reviews={reviews?.items || []} onOpenReviews={onOpenReviews} onOpenStart={onStartDelivery}/>
+      <HomeGallery title={`다음주 레시피`} subtitle={`식재료 남김 없이,\n건강한 집밥 플랜하세요!`} items={nextWeekRecipes} />
       <div className="hidden md:block"><HomeSchedule onAction={onStartDelivery}/></div>
       <div className="block md:hidden"><HomeScheduleMobile onAction={onStartDelivery}/></div>      
-      <HomeGallery title={`일주일 집밥 식재료들`} subtitle={`제철인 냉이와 봄미나리,\n싱싱하게 보내드려요~`} />
+      <HomeGallery title={`일주일 집밥 식재료들`} subtitle={`제철인 냉이와 봄미나리,\n싱싱하게 보내드려요~`} items={nextWeekIngredients} />
       <HomeCTA onAction={onStartDelivery}/>
     </div>
   );
@@ -62,12 +68,6 @@ Home.propTypes = {
 };
 
 Home.defaultProps = {
-  category: {
-    categoryId: 0,
-    products: {
-      items: []
-    }
-  }
 };
 
 export const layout = {
@@ -76,34 +76,39 @@ export const layout = {
 };
 
 export const query = `
-  query Query {
+  query Query ($version: String, $varsFromAdmin: JSON, $filters: [FilterInput!]) {
+    version: const(value: $version)
+    varsFromAdmin: dict(value: $varsFromAdmin)
     homeUrl: url(routeId: "homepage")
     cartUrl: url(routeId: "cart")
     emptifyMineCart: url(routeId: "emptifyMineCart")
     addMineCartItem: url(routeId: "addMineCartItem")
-    category: category(id: 9) {
-      categoryId
-      products (filters: []) {
-        items {
-          reviews {
-            createdAt
-            reviewId
-            rating
-            customerName
-            comment
-            product {
-              productId
-              uuid
-              name
-              sku
-            }
-            image {
-              alt
-              origin
-            }
-          }
+    reviews (filters: $filters) {
+      items {
+        reviewId
+        uuid
+        createdAt
+        rating
+        customerName
+        comment
+        image {
+          alt
+          origin
         }
+      }
+      total
+      currentFilters {
+        key
+        operation
+        value
       }
     }
   }
 `;
+
+export const variables = `
+{
+  filters: getContextValue('filtersFromVars'),
+  varsFromAdmin: getContextValue('varsFromAdmin'),
+  version: '1.0.0',
+}`;
