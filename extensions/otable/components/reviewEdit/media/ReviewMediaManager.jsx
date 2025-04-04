@@ -9,20 +9,25 @@ import { toast } from 'react-toastify';
 import { get } from '@evershop/evershop/src/lib/util/get';
 import './ReviewMediaManager.scss';
 import Spinner from '@components/common/Spinner';
+import { compressImage } from '@evershop/otable/utils/image';
+import { getKSTDateString } from '@evershop/otable/utils/format';
+import { v4 as uuidv4 } from 'uuid';
 
 function Upload({ addImage, reviewImageUploadUrl }) {
   const [uploading, setUploading] = React.useState(false);
 
-  const onChange = (e) => {
+  const onChange = async (e) => {
     setUploading(true);
     e.persist();
     const formData = new FormData();
     for (let i = 0; i < e.target.files.length; i += 1) {
-      formData.append('images', e.target.files[i]);
+      const compressed = await compressImage(e.target.files[i]); // 압축 + 리사이즈
+      const extension = compressed.name.split('.').pop() || 'jpg';
+      const fileName = `${uuidv4()}.${extension}`;
+      formData.append('images', compressed, fileName);
     }
-    const targetPath = `review/${
-      Math.floor(Math.random() * (9999 - 1000)) + 1000
-    }/${Math.floor(Math.random() * (9999 - 1000)) + 1000}`;
+    const today = getKSTDateString(); // 예: 20250404
+    const targetPath = `review/${today}`;
     formData.append('targetPath', targetPath);
     fetch(reviewImageUploadUrl + targetPath, {
       method: 'POST',
