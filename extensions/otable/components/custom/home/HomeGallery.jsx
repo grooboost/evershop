@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeGalleryCard from './HomeGalleryCard';
+import './Custom.scss'
 
 const HomeGallery = ({title, subtitle, items}) => {
   return (
@@ -16,7 +17,7 @@ const HomeGallery = ({title, subtitle, items}) => {
           </div>
           <div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
               
-                <div style={{ width: '100%', overflowX: 'auto', paddingTop: '12px', scrollbarWidth: 'none', msOverflowStyle: 'none' }} className="scroll-hidden">
+                <div className='scrollbar-hidden' style={{ width: '100%', overflowX: 'auto', paddingTop: '12px'}}>
                     <div style={{ textAlign: 'center' }}>
                         <div style={{ display: 'inline-flex', gap: '10px', flexWrap: 'nowrap', flexDirection: 'column' }}>
                             <div style={{alignSelf: "stretch", overflow: "hidden", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "center", gap: "10px",}}>
