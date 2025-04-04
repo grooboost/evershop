@@ -3,7 +3,7 @@ import HomeGalleryCard from './HomeGalleryCard';
 
 const HomeGallery = ({title, subtitle, items}) => {
   return (
-      <div style={{width: "100%", position: "relative", backgroundColor: "#f5f5f7", overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "56px 10px 96px", boxSizing: "border-box", gap: "32px", textAlign: "center", fontSize: "18px", color: "#cd8f50", fontFamily: "Pretendard",}}>
+      <div style={{width: "100%", position: "relative", backgroundColor: "#f5f5f7", overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "56px 10px 96px", boxSizing: "border-box", gap: "32px", textAlign: "center", fontSize: "18px", color: "#cd8f50",}}>
           <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", gap: "12px",}}>
               <div style={{width: "195.5px", position: "relative", borderBottom: "2px solid #cd8f50", boxSizing: "border-box", height: "26px",}}>
                   <div style={{position: "absolute", top: "-0.75px", left: "calc(50% - 97.75px)", lineHeight: "25.2px", fontWeight: "500", display: "flex", alignItems: "center", justifyContent: "center", width: "195.8px", height: "26px",}}>{title}</div>

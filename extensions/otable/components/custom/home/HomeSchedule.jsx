@@ -6,7 +6,7 @@ import ScheduleStep3 from '@evershop/otable/assets/icons/ScheduleStep3';
 
 const HomeSchedule = ({ onAction }) => {
   	return (
-    		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "72px 0px", boxSizing: "border-box", textAlign: "left", fontSize: "14px", color: "#ff6741", fontFamily: "Pretendard",}}>
+    		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "72px 0px", boxSizing: "border-box", textAlign: "left", fontSize: "14px", color: "#ff6741",}}>
       			<div style={{width: "100%", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "center", padding: "0px 10px", gap: "24px", maxWidth: "944px",}}>
         				<div style={{alignSelf: "stretch", flex: "1", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", gap: "12px",}}>
           					<div style={{borderRadius: "10px", backgroundColor: "rgba(255, 103, 65, 0.1)", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "10px 12px",}}>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Company = () => {
   	return (
-    		<div style={{width: "100%", position: "relative", backgroundColor: "#f7f7f8", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "40px 0px", boxSizing: "border-box", textAlign: "left", fontSize: "13px", color: "#1f2937", fontFamily: "Pretendard",}}>
+    		<div style={{width: "100%", position: "relative", backgroundColor: "#f7f7f8", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "40px 0px", boxSizing: "border-box", textAlign: "left", fontSize: "13px", color: "#1f2937",}}>
       			<div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "0px 20px", boxSizing: "border-box", maxWidth: "1024px",}}>
         				<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
           					<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", gap: "29px",}}>

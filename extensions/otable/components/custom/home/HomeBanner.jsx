@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomeBanner = ({ onAction }) => {
   return (
-      <div style={{width: "100%", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", textAlign: "left", fontSize: "16px", color: "#fff", fontFamily: "Pretendard",}}>
+      <div style={{width: "100%", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", textAlign: "left", fontSize: "16px", color: "#fff",}}>
           <img style={{width: "1920px", position: "absolute", margin: "0", left: "calc(50% - 960px)", overflow: "hidden", flexShrink: "0", objectFit: "cover", maxWidth: "1920px", zIndex: "0",}} alt="" src="https://grooboost-public.s3.amazonaws.com/public/homebanner.jpg" />
           <div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "96px 0px 103px 20px", boxSizing: "border-box", gap: "19px", maxWidth: "828px", zIndex: "1",}}>
               <div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start",}}>

@@ -6,7 +6,7 @@ import ScheduleStep3 from '@evershop/otable/assets/icons/ScheduleStep3';
 
 const HomeSchedulMobile = ({ onAction }) => {
   	return (
-    		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "72px 24px", boxSizing: "border-box", maxWidth: "992px", textAlign: "left", fontSize: "14px", color: "#ff6741", fontFamily: "Pretendard",}}>
+    		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "72px 24px", boxSizing: "border-box", maxWidth: "992px", textAlign: "left", fontSize: "14px", color: "#ff6741",}}>
       			<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", gap: "24px",}}>
         				<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", gap: "12px",}}>
           					<div style={{borderRadius: "10px", backgroundColor: "rgba(255, 103, 65, 0.1)", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "10px 12px",}}>

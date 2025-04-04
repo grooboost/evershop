@@ -2,7 +2,7 @@ import React from 'react';
 
 const CompanyMobile = () => {
   	return (
-    		<div style={{width: "100%", position: "relative", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "10px", boxSizing: "border-box", textAlign: "left", fontSize: "13px", color: "#1f2937", fontFamily: "Pretendard",}}>
+    		<div style={{width: "100%", position: "relative", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", padding: "10px", boxSizing: "border-box", textAlign: "left", fontSize: "13px", color: "#1f2937",}}>
       			<div style={{alignSelf: "stretch", backgroundColor: "#f7f7f8", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "40px 0px",}}>
         				<div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "0px 10px", boxSizing: "border-box", gap: "24px", maxWidth: "1024px",}}>
           					<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", padding: "0px 10px", fontSize: "18px",}}>

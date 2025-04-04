@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 const HomeReviews = ({ count, rating, reviews, onOpenReviews, onOpenStart }) => {
 	return (
-		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "72px 0px", boxSizing: "border-box", gap: "12px", textAlign: "center", fontSize: "26px", color: "#3a3a3a", fontFamily: "Pretendard",}}>
+		<div style={{width: "100%", position: "relative", backgroundColor: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "72px 0px", boxSizing: "border-box", gap: "12px", textAlign: "center", fontSize: "26px", color: "#3a3a3a",}}>
 				<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
 						<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",}}>
 								<b style={{alignSelf: "stretch", position: "relative", lineHeight: "33.8px",}}>
