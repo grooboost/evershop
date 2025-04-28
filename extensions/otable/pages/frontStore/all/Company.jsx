@@ -39,7 +39,7 @@ const Company = () => {
             						<div style={{alignSelf: "stretch", position: "relative", borderTop: "1px solid #cd8f50", boxSizing: "border-box", height: "1px", overflow: "hidden", flexShrink: "0", opacity: "0.2",}} />
             						<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", color: "#676e7b",}}>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", flexWrap: "wrap", alignContent: "flex-start",}}>
-                								<div style={{flex: "1", position: "relative", lineHeight: "23.4px",}}>상호명 : 주식회사 그루부스트  |  사업자등록번호 : 803-86-03259  |  소재지 : 경기도 용인시 수지구 수지로342번길 34, 4층</div>
+                								<div style={{flex: "1", position: "relative", lineHeight: "23.4px",}}>상호명 : 주식회사 그루부스트  |  대표 : 김장현, 박슬아  |  사업자등록번호 : 803-86-03259  |  소재지 : 경기도 용인시 수지구 수지로342번길 34, 4층</div>
               							</div>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "flex-start", flexWrap: "wrap", alignContent: "flex-start", marginTop: "-0.7px", position: "relative",}}>
                 								<div style={{flex: "1", position: "relative", lineHeight: "23.4px",}}>

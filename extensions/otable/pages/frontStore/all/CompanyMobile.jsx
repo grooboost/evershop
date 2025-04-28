@@ -42,6 +42,9 @@ const CompanyMobile = () => {
                 								<div style={{alignSelf: "stretch", position: "relative", lineHeight: "23.4px",}}>상호명 : 주식회사 그루부스트</div>
               							</div>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", marginTop: "-0.7px", position: "relative",}}>
+                								<div style={{alignSelf: "stretch", position: "relative", lineHeight: "23.4px",}}>대표 : 김장현, 박슬아</div>
+              							</div>
+              							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", marginTop: "-0.7px", position: "relative",}}>
                 								<div style={{alignSelf: "stretch", position: "relative", lineHeight: "23.4px",}}>사업자등록번호 : 803-86-03259</div>
               							</div>
               							<div style={{alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", marginTop: "-0.7px", position: "relative",}}>
