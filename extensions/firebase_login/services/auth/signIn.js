@@ -10,6 +10,8 @@ const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const { select, insert } = require('@evershop/postgres-query-builder');
 const { error } = require('@evershop/evershop/src/lib/log/logger');
 const { generateDeterministicPassword } = require('@evershop/firebase_login/utils/auth');
+const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -23,6 +25,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 const auth = getAuth();
 
 async function registerUser(user, name) {
@@ -110,6 +115,19 @@ module.exports.signInWithCustomToken = async (
   customToken
 ) => {
   const result = await signInWithCustomToken(auth, customToken)
+  const user = result.user;
+
+  return user;
+};
+
+module.exports.signInWithIdToken = async (
+  idToken
+) => {
+  const decoded = await admin.auth().verifyIdToken(idToken);
+  const uid = decoded.uid;
+
+  const customToken = await admin.auth().createCustomToken(uid);
+  const result = await signInWithCustomToken(auth, customToken);
   const user = result.user;
 
   return user;
