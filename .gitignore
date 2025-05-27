@@ -1,5 +1,4 @@
 node_modules
-*.json
 .env*
 ./dist
 themes
@@ -16,3 +15,4 @@ cypress
 .prettierignore
 .prettierrc
 mysqlToPostgres.js
+serviceAccountKey.json
